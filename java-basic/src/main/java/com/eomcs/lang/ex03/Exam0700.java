@@ -27,6 +27,15 @@ public class Exam0700 {
     System.out.println('\''); // ' 문자를 출력시키는 문자
     System.out.println('"'); // '' 안에서 " 문자는 그냥 적는다.
     System.out.println("c:\\Users\\user\\git"); // \ 문자를 출력시키는 문자
+
+    System.out.println("|\\_/|");
+    System.out.println("|q p|   /}");
+    System.out.println("( 0 )\"\"\"\\");
+    System.out.println("|\"^\"`    |");
+    System.out.println("||_/=\\__|");
+
+    System.out.println("|\\\\_/|\n|q p|   /}\n( 0 )\\\"\\\"\\\"\\\\\n|\\\"^\\\"`\n|||_/=\\\\__|");
+
   }
 }
 
