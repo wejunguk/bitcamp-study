@@ -7,7 +7,7 @@ package com.eomcs.lang.ex03;
 //  대신 '유효자릿수'라는 방식으로 대략적으로 값의 범위를 표현한다. 
 //
 public class Exam0340 {
-  static float text = 12.375f;
+
   public static void main(String[] args) {
 
     //## 4byte(float) 부동소수점의 유효자릿수
@@ -27,7 +27,7 @@ public class Exam0340 {
     //소수점을 뺀 후 16자리 숫자까지는 거의 정상적으로 저장된다.
     System.out.println(987654321.1234567);
     System.out.println(9.876543211234567);
-    System.out.println(987654321123456.7);
+    System.out.println(987654321123456.7); // 소수점이 짤리는건 어쩔 수 없는, 부동소수점의 한계
     System.out.println("----------------------------");
 
     //유효자릿수가 16자리를 넘어가는 경우 값이 잘려서 저장될 수 있다.
