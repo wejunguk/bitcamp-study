@@ -4,8 +4,9 @@ package com.eomcs.lang.ex99;
 //
 public class Exam0220 {
   public static void main(String[] args) {
-    java.io.InputStream keyboard = System.in;
-    java.util.Scanner keyScan = new java.util.Scanner(keyboard);
+    java.io.InputStream keyboard = System.in; //입력장치를 불러온다. 콘솔에 입력할 수 있는 창이 생긴다.System.in->키보드
+    java.util.Scanner keyScan = new java.util.Scanner(keyboard); //Scanner->어떤 바이트로 불러올지 지정/ 
+    //스캐너는 스스로 장비를 불어올 수 없음 
 
     // 팀 멤버의 정보를 입력 받아 출력하라.
     // 이름, 전화, 이메일, 나이, 재직여부
