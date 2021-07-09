@@ -1,6 +1,6 @@
 package com.eomcs.lang.ex05;
 
-//# 산술 연산자 : 암시적 형변환(implicit type conversion)
+//# 산술 연산자 : 암시적 형변환(implicit type conversion; type casting) **
 //
 public class Exam0150 {
   public static void main(String[] args) {
@@ -14,11 +14,12 @@ public class Exam0150 {
     char c = 7;
 
     // byte + byte = int
-    // => 연산을 하기 전에 byte 값이 int로 암시적 형변환 된다.
+    // => 연산을 하기 전에 byte 값이 int로 암시적 형변환 된다.= byte에서 int로 바뀐다는게 아니라 int로 암시적으로 바꿈. 계산하기전 지정된 형태로 복사되어서
+    //작업이 진행된다.
     //byte r1 = b + b; // 컴파일 오류!
 
     // short + short = int
-    // => 연산을 하기 전에 short 값이 int로 암시적 형변환 된다.
+    // => 연산을 하기 전에 short 값이 int로 암시적 형변환 된다. ->int로 변환안해도 스스로 변화해서 계산함
     //short r2 = s + s; // 컴파일 오류!
 
     // byte + short = int
@@ -26,7 +27,7 @@ public class Exam0150 {
     //short r3 = b + s; // 컴파일 오류!
 
     // byte + int = int
-    // => byte가 int로 암시적 형변환 한 이후 연산을 수행한다.
+    // => byte가 int로 암시적 형변환 한 이후 연산을 수행한다. *타입이 다르면 연산이 불가능하다! 지금 연산이 된 이후는 타입을 맞춤
     int r4 = b + i; // OK
 
     // short + int = int
@@ -39,7 +40,8 @@ public class Exam0150 {
 
     // long + float = float
     // => long이 float으로 암시적 형변환 한 후에 연산을 수행한다.
-    //long r7 = l + f; // 컴파일 오류!
+    //long r7 = l + f; // 컴파일 오류! 롱과 플롯을 더하면 롱이 플롯으로 변환된 후 플롯과 플롯을 더하게 됨
+    //그럼 결과값이 플롯인데 long에 담으려고 하니 오류가 생김
 
     // int + float = float
     // => 정수 타입의 값과 부동소수점 타입의 값을 연산하면

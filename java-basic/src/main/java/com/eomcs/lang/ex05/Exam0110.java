@@ -11,3 +11,5 @@ public class Exam0110 {
     System.out.println(100 % 27); // 나눈 나머지 
   }
 }
+
+//연산차(operoder)

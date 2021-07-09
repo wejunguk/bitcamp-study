@@ -27,22 +27,23 @@ public class Exam0510 {
 
     // 배열의 크기는 int 타입의 최대 값에서 2를 뺀 값이다.
     // 배열의 최대 크기 = Integer.MAX_VALUE - 2
-    
-    //int[] arr3 = new int[2147483647]; // 실행 오류 => VM의 배열 크기 제한을 초과
+
+    //int[] arr3 = new int[2147483647]; // 실행 오류 => VM의 배열 크기 제한을 초과 / short,double가 와도 배열은 int의 성질이여서 2147483647 넘으면 오류
     // Exception in thread "main" java.lang.OutOfMemoryError: Requested array size exceeds VM limit
-    
-    int[] arr3 = new int[2147483645]; // OK!
-    //int[] arr3 = new int[Integer.MAX_VALUE - 2]; // OK!
+
+    //int[] arr3 = new int[2147483645]; // OK!
+    int[] arr3 = new int[Integer.MAX_VALUE - 2]; // OK! int최대값을 어떻게 기억하니.. 그냥 MAX_VALUE를 주고 -2로 빼기!
 
     // 실행 오류 발생!
     // => Exception in thread "main" java.lang.OutOfMemoryError: Java heap space
     // => JVM이 OS로부터 사용 허가를 받은 메모리 크기를 벗어났기 때문에 발생한 것이다.
-    
+
     // 해결책?
     // => JVM을 실행할 때 최대 힙(heap) 메모리의 크기를 늘리면 된다.
     // => JVM 실행 옵션에 다음을 추가하라!
     //        -Xmx메모리크기
-    //    예) $ java -Xmx20000m ...
+    //    예) $ java -Xmx20000m ... // RAM이 물리적으로 4GB뿐이 안 뽑히지만 하드디스크 메모리를 잠시 빼놓고(추가로 용량을 뽑음,자체적으로) 돌리수 있게 하는 ..
+    System.out.println("종료!");
   }
 }
 

@@ -1,15 +1,15 @@
 package com.eomcs.lang.ex05;
 
-//# 산술 연산자 : 연산의 결과 타입
+//# 산술 연산자 : 연산의 결과 타입 ★ 연산의 결과 타입은 피연산자와 같다.int와int연산결과는 int다
 //
 public class Exam0141 {
   public static void main(String[] args) {
-    
+
     // 연산을 수행한 후 생성된 결과도 피연산자와 같은 타입이다.
-    
+
     int i = 5;
     int j = 2;
-    float r = i / j; // int와 int의 연산 결과는 항상 int이다.
+    float r = i / j; // int와 int의 연산 결과는 항상 int이다. 정수 나누기 정수는 이미 정수
     // 따라서 r 변수에 넣기 전에 
     // 이미 결과는 정수 2가 된다.
     // 정수 2를 float 변수에 넣으면 
@@ -19,7 +19,7 @@ public class Exam0141 {
     // 해결책!
     // - 변수에 들어 있는 값을 다른 타입으로 바꿔라.
     //   "형변환(type conversion=type casting)"하라!
-    r = (float)i / (float)j; // float / float = float
+    r = (float)i / (float)j; // float / float = float 
     // i / j의 값은 2.5가 되고
     // r에 저장되는 것은 2.5이다.
     System.out.println(r);                         

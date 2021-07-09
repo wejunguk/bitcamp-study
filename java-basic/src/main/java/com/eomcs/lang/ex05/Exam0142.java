@@ -1,6 +1,6 @@
 package com.eomcs.lang.ex05;
 
-//# 산술 연산자 : 연산의 결과 타입
+//# 산술 연산자 : 연산의 결과 타입 **
 //
 public class Exam0142 {
   public static void main(String[] args) {
@@ -8,10 +8,10 @@ public class Exam0142 {
     // 다른 타입이 될 수 없다.
     // => 0111 1111 1111 1111 1111 1111 1111 1111 = Integer.MAX_VALUE
     //
-    int x = Integer.MAX_VALUE; // 0x7fffffff = 약 +21억
+    int x = Integer.MAX_VALUE; // 0x7fffffff = 약 +21억 외울수 없으니 intger쓸땐 최대 정수값이 저장 된다.
     int y = Integer.MAX_VALUE; // 0x7fffffff = 약 +21억
-    
-    int r1 = x + y; // 0x7fffffff + 0x7fffffff = 0xfffffffe = -2
+
+    int r1 = x + y; // 0x7fffffff + 0x7fffffff = 0xfffffffe = -2 // 4byte+4byre 결과가 4byte 넘지 않게 하자
     //   0111 1111 1111 1111 1111 1111 1111 1111(x)
     // + 0111 1111 1111 1111 1111 1111 1111 1111(y)
     // ---------------------------------------------
@@ -19,10 +19,11 @@ public class Exam0142 {
     System.out.println(r1); // int(4byte) + int(4byte) = int(4byte)
     // => int와 int의 연산 결과가 int의 범위를 넘어가면 
     //    의도한 결과가 나오지 않을 수 있다.
-    
+
     // 그래서 int와 int의 연산 결과를 더 큰 메모리에 담는다면 해결될까?
     long r2 = x + y;  // 0x7fffffff + 0x7fffffff = 0xfffffffe = -2
-    System.out.println(r2); // int(4byte) + int(4byte) = int(4byte)
+    System.out.println(r2); // int(4byte) + int(4byte) = int(4byte) -> int와 int의 연산결과는 int라서 넘어가는건 값이 짤림. long 써도 짤려나옴
+    // 정수와 정수 결과는 정수이기 때문에 결과값이 정수가 넘어가지 않게 해야한다. 넘어 갈 것 같으면 long임시변수에 담아서(ex.long담기->형변화) 연산하기
     // 해결 안됨!
     // r2의 출력 결과를 보면 42억이 출력되는 것이 아니라 -2가 출력된다.
     // 이유?

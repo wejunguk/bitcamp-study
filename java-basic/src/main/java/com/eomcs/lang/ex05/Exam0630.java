@@ -6,8 +6,8 @@ public class Exam0630 {
   public static void main(String[] args) {
     int i = 7;
 
-    int j = i++;
-    
+    int j = i++; // 오른편에 있는 모든 문장이 끝나면 왼쪽 변수에 할당이 이루어짐
+
     // 위 문장은 컴파일될 때 다음과 같은 형태로 변환된다.
     // int temp = i;
     // i = i + 1;
@@ -25,7 +25,7 @@ public class Exam0630 {
     // 3) 할당 연산자 실행
     //    => j <=== 7 실행
 
-    System.out.println(j);
-    System.out.println(i);
+    System.out.println(j); // 일단 j에 증감되기 전 값을 부여 함 
+    System.out.println(i); // 증가 된 값 놓음
   }
 }

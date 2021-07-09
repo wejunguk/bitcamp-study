@@ -15,12 +15,12 @@ public class Exam0930 {
     //
     // float ==> int 
     float f = 3.14f;
-    int i = (int)f;  // 소수점 이하가 제거된다.
+    int i = (int)f;  // 소수점 이하가 제거된다. f에 들어있는 변수를 가져와서 (3.14f) 소수점 이하를 버린다 ->3 결과나옴
     System.out.println(i);
 
     // double ==> long
     double d = 9876.56789;
-    long l = (long)d; // 소수점 이하가 제거된다.
+    long l = (long)d; // 소수점 이하가 제거된다. / 위에 동일하게 작동 됨
     System.out.println(l);
   }
 }
