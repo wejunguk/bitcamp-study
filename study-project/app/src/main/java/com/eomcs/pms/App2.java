@@ -1,42 +1,47 @@
 package com.eomcs.pms;
 
 import java.sql.Date;
+import java.util.Scanner;
 
 public class App2 {
 
   public static void main(String[] args) {
-    java.util.Scanner keyboard = new java.util.Scanner(System.in);
-
     System.out.println("[프로젝트]");
 
+    Scanner keyboardScan = new Scanner(System.in);
+
     System.out.print("번호? ");
-    int number = keyboard.nextInt();
-    keyboard.nextLine();
+    int no = keyboardScan.nextInt();
+    keyboardScan.nextLine(); // 번호 뒤에 남아 있는 줄바꿈 코드를 제거한다.
 
     System.out.print("프로젝트명? ");
-    String projectName = keyboard.nextLine();
+    String title = keyboardScan.nextLine();
 
     System.out.print("내용? ");
-    String text = keyboard.nextLine();
+    String content = keyboardScan.nextLine();
 
-    System.out.println("시작일? ", format(now));
-    
+    System.out.print("시작일? ");
+    Date startDate = Date.valueOf(keyboardScan.nextLine());
 
-    System.out.println("종료일? ");
+    System.out.print("종료일? ");
+    Date endDate = Date.valueOf(keyboardScan.nextLine());
 
     System.out.print("만든이? ");
-    String name = keyboard.nextLine();
+    String owner = keyboardScan.nextLine();
 
     System.out.print("팀원? ");
-    String team = keyboard.nextLine();
+    String members = keyboardScan.nextLine();
 
-    System.out.print("--------------------------------");
-    System.out.printf("번호:$d\n ", number);
-    System.out.printf("프로젝트명:$s\n ", projectName);
-    System.out.printf("내용: #s\n", text);
-    System.out.println("시작일: " + "2020-01-01");
-    System.out.println("종료일: " + "2020-12-31");
-    System.out.printlnf("만든이: %s\n", name);
-    System.out.printlnf("팀원: %s\n", team}
+    keyboardScan.close();
+
+    System.out.println("--------------------------------");
+
+    System.out.printf("번호: %d\n", no);
+    System.out.printf("프로젝트명: %s\n", title);
+    System.out.printf("내용: %s\n", content);
+    System.out.printf("시작일: %s\n", startDate);
+    System.out.printf("종료일: %s\n", endDate);
+    System.out.printf("만든이: %s\n", owner);
+    System.out.printf("팀원: %s\n", members);
   }
 }
