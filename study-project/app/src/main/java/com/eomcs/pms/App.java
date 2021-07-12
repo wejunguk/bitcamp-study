@@ -1,68 +1,149 @@
 package com.eomcs.pms;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.Scanner;
 
-
-
-//8 날짜의 출력형식을 "yyyy-MM-dd"로 출력한다
-public class App {
+// 1) 낱개의 변수를 사용하여 여러 회원 정보 처리하기
+public class App_a {
 
   public static void main(String[] args) {
     System.out.println("[회원]");
 
-    final int MAX_LENGTH = 100; //전체갯수
-
-    int[] no = new int[MAX_LENGTH]; //maxLength는 숫자대신 쓰면 간편하다/입력한 값만큼 돔
-    String[] name = new String[MAX_LENGTH];
-    String[] email = new String[MAX_LENGTH];
-    String [] photo = new String[MAX_LENGTH];
-    String [] password = new String[MAX_LENGTH];
-    String [] tell =new String[MAX_LENGTH];
-    Date[] registeredDate = new Date[MAX_LENGTH];
-
     Scanner keyboardScan = new Scanner(System.in);
 
-    int size = 0; //지정된 갯수만큼만 돌린다
+    // 최대 5명의 회원 정보를 저장할 메모리 준비
+    int no1 = 0, no2 = 0, no3 = 0, no4 = 0, no5 = 0;
+    String name1 = "", name2 = "", name3 = "", name4 = "", name5 = "";
+    String email1 = "", email2 = "", email3 = "", email4 = "", email5 = "";
+    String password1 = "", password2 = "", password3 = "", password4 = "", password5 = "";
+    String photo1 = "", photo2 = "", photo3 = "", photo4 = "", photo5 = "";
+    String tel1 = "", tel2 = "", tel3 = "", tel4 = "", tel5 = "";
+    Date registeredDate1 = null, registeredDate2 = null, registeredDate3 = null, registeredDate4 = null, registeredDate5 = null;
 
+    System.out.print("번호? ");
+    no1 = Integer.parseInt(keyboardScan.nextLine());
 
-    for (int i = 0; i < MAX_LENGTH; i = i + 1) {
-      size = size + 1; // 1개가 입력되었으면 어딘가에 저장해둬라, 2개면 2개 입력해둬라
+    System.out.print("이름? ");
+    name1 = keyboardScan.nextLine();
 
-      System.out.print("번호? ");
-      no[i] = Integer.parseInt(keyboardScan.nextLine()); // index 약자 i 사용
-      System.out.print("이름? ");
-      name[i] = keyboardScan.nextLine();
-      System.out.print("이메일? ");
-      email[i] = keyboardScan.nextLine();
-      System.out.print("암호? ");
-      password[i] = keyboardScan.nextLine();
-      System.out.print("사진? ");
-      photo[i] = keyboardScan.nextLine();
-      System.out.print("전화? ");
-      tell[i] = keyboardScan.nextLine();
-      registeredDate[i] = new Date ();
-      System.out.println();
+    System.out.print("이메일? ");
+    email1 = keyboardScan.nextLine();
 
-      System.out.println("계속 입력하시겠습니까? (y/N)");
-      String input = keyboardScan.nextLine();
-      if (input.equalsIgnoreCase("N") || input.equals("")) { //input 의 값과 N의 값이 같으면 참, 다르면 false
-        break;
-      }
-      System.out.println();
-    }
+    System.out.print("암호? ");
+    password1 = keyboardScan.nextLine();
 
-    keyboardScan.close(); 
+    System.out.print("사진? ");
+    photo1 = keyboardScan.nextLine();
+
+    System.out.print("전화? ");
+    tel1 = keyboardScan.nextLine();
+
+    registeredDate1 = new java.sql.Date(System.currentTimeMillis());
+
+    System.out.println(); // 빈 줄 출력
+
+    System.out.print("번호? ");
+    no2 = Integer.parseInt(keyboardScan.nextLine());
+
+    System.out.print("이름? ");
+    name2 = keyboardScan.nextLine();
+
+    System.out.print("이메일? ");
+    email2 = keyboardScan.nextLine();
+
+    System.out.print("암호? ");
+    password2 = keyboardScan.nextLine();
+
+    System.out.print("사진? ");
+    photo2 = keyboardScan.nextLine();
+
+    System.out.print("전화? ");
+    tel2 = keyboardScan.nextLine();
+
+    registeredDate2 = new java.sql.Date(System.currentTimeMillis());
+
+    System.out.println(); // 빈 줄 출력
+
+    System.out.print("번호? ");
+    no3 = Integer.parseInt(keyboardScan.nextLine());
+
+    System.out.print("이름? ");
+    name3 = keyboardScan.nextLine();
+
+    System.out.print("이메일? ");
+    email3 = keyboardScan.nextLine();
+
+    System.out.print("암호? ");
+    password3 = keyboardScan.nextLine();
+
+    System.out.print("사진? ");
+    photo3 = keyboardScan.nextLine();
+
+    System.out.print("전화? ");
+    tel3 = keyboardScan.nextLine();
+
+    registeredDate3 = new java.sql.Date(System.currentTimeMillis());
+
+    System.out.println(); // 빈 줄 출력
+
+    System.out.print("번호? ");
+    no4 = Integer.parseInt(keyboardScan.nextLine());
+
+    System.out.print("이름? ");
+    name4 = keyboardScan.nextLine();
+
+    System.out.print("이메일? ");
+    email4 = keyboardScan.nextLine();
+
+    System.out.print("암호? ");
+    password4 = keyboardScan.nextLine();
+
+    System.out.print("사진? ");
+    photo4 = keyboardScan.nextLine();
+
+    System.out.print("전화? ");
+    tel4 = keyboardScan.nextLine();
+
+    registeredDate4 = new java.sql.Date(System.currentTimeMillis());
+
+    System.out.println(); // 빈 줄 출력
+
+    System.out.print("번호? ");
+    no5 = Integer.parseInt(keyboardScan.nextLine());
+
+    System.out.print("이름? ");
+    name5 = keyboardScan.nextLine();
+
+    System.out.print("이메일? ");
+    email5 = keyboardScan.nextLine();
+
+    System.out.print("암호? ");
+    password5 = keyboardScan.nextLine();
+
+    System.out.print("사진? ");
+    photo5 = keyboardScan.nextLine();
+
+    System.out.print("전화? ");
+    tel5 = keyboardScan.nextLine();
+
+    registeredDate5 = new java.sql.Date(System.currentTimeMillis());
+
+    System.out.println(); // 빈 줄 출력
+
+    keyboardScan.close();
 
     System.out.println("--------------------------------");
 
-    for (int i = 0; i < size; i= i + 1) {
-      System.out.printf("%d, %s, %s, %s, %tY-%5$tm-%5$td\n", // 5$인 이유 -> printf에서 5번째 
-          no[i],
-          name[i],
-          email[i],
-          tell[i],
-          registeredDate[i]);
-    }
+    // 번호, 이름, 이메일, 전화, 가입일
+    System.out.printf("%d, %s, %s, %s, %s\n", // 출력 형식 지정
+        no1, name1, email1, tel1, registeredDate1);
+    System.out.printf("%d, %s, %s, %s, %s\n", // 출력 형식 지정
+        no2, name2, email2, tel2, registeredDate2);
+    System.out.printf("%d, %s, %s, %s, %s\n", // 출력 형식 지정
+        no3, name3, email3, tel3, registeredDate3);
+    System.out.printf("%d, %s, %s, %s, %s\n", // 출력 형식 지정
+        no4, name4, email4, tel4, registeredDate4);
+    System.out.printf("%d, %s, %s, %s, %s\n", // 출력 형식 지정
+        no5, name5, email5, tel5, registeredDate5);
   }
 }

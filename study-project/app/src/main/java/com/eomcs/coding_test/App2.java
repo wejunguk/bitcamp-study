@@ -10,41 +10,27 @@ public class App2 {
 
     Scanner keyboardScan = new Scanner(System.in);
 
-    int [] no = new int[5];
-    String [] title = new int[5];
-    String [] cont = new int[5];
-    String [] startDate = new int[5];
-    String [] endDate = new int[5];
-    String [] owner = new int[5];
-    String [] members = now int [5];
+    System.out.print("번호? ");
+    int no = keyboardScan.nextInt();
+    keyboardScan.nextLine(); // 번호 뒤에 남아 있는 줄바꿈 코드를 제거한다.
 
-    int size = 0;
+    System.out.print("프로젝트명? ");
+    String title = keyboardScan.nextLine();
 
-    for (int i = 0; i < 5; i++) {
-      System.out.print("번호? ");
-      no[i] = Integer.valueOf(keyboardScan.nextLine());
+    System.out.print("내용? ");
+    String content = keyboardScan.nextLine();
 
-      System.out.print("프로젝트명? ");
-      String title = keyboardScan.nextLine();
+    System.out.print("시작일? ");
+    Date startDate = Date.valueOf(keyboardScan.nextLine());
 
-      System.out.print("내용? ");
-      String content = keyboardScan.nextLine();
+    System.out.print("종료일? ");
+    Date endDate = Date.valueOf(keyboardScan.nextLine());
 
-      System.out.print("시작일? ");
-      Date startDate = Date.valueOf(keyboardScan.nextLine());
+    System.out.print("만든이? ");
+    String owner = keyboardScan.nextLine();
 
-      System.out.print("종료일? ");
-      Date endDate = Date.valueOf(keyboardScan.nextLine());
-
-      System.out.print("만든이? ");
-      String owner = keyboardScan.nextLine();
-
-      System.out.print("팀원? ");
-      String members = keyboardScan.nextLine();
-
-    }
-
-
+    System.out.print("팀원? ");
+    String members = keyboardScan.nextLine();
 
     keyboardScan.close();
 

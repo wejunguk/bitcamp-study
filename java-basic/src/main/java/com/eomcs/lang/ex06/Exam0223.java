@@ -9,7 +9,8 @@ public class Exam0223 {
     // => 일부러 쓰지 않을 때가 있다.
     switch (score) {
       case 100:
-      case 90:
+      case 90: //break안쓰고 바로 넘어감 
+        // 90~92 점수같이 정교한 작업을 하고 싶을땐 if 사용
         System.out.println("A");
         break;
       case 80:

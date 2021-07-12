@@ -13,8 +13,8 @@ public class Exam0412 {
       System.out.println(i);
       i++;
     }
-    
+
     // for 문을 종료한 후에도 i 변수를 사용할 수 있다.
-    //System.out.println(i);
+    //System.out.println(i); //for문 밖에서 i가 정의됐기 때문에 사용 할 수 있다.
   }
 }
