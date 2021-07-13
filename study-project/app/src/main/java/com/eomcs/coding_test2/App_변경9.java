@@ -11,11 +11,12 @@ import java.util.Scanner;
 //6)/member/add와 /member/list 명령을 구분해보자
 //7)/member/add 명령 처리
 //8)/member/list 명령 처리
-public class App_변경8 {
+//9)project 명령 처리
+public class App_변경9 {
 
   public static void main(String[] args) {
     Scanner keyboardScan = new Scanner(System.in); //열었음 닫기 (1)
-    // 최대 입력 개수
+    // 회원 정보와 관련된 변수
     final int LENGTH = 100;
 
     int[] no = new int[LENGTH];
@@ -27,6 +28,19 @@ public class App_변경8 {
     Date[] registeredDate = new Date[LENGTH]; //빨간색 뜨면 ctrl+스페이스 눌러서 스캐너설정
 
     int size = 0;
+
+    // 프로젝트 정보와 관련된 변수
+    final int PROJECTLENGTH = 1000; //length 사용하면 안됨->회원정보는 100개인데 프로젝트 정보는 1000개일수있으니깐, 변수명이 같음, 변수명 수정
+
+    int[]pNo = new int[PROJECTLENGTH];
+    String[] pTitle = new String[PROJECTLENGTH];
+    String[] pContent = new String[PROJECTLENGTH];
+    Date[] pStarDate = new Date[PROJECTLENGTH];
+    Date[] pEndDate = new Date[PROJECTLENGTH];
+    String[] pOwner = new String[PROJECTLENGTH];
+    String[] pMembers = new String[PROJECTLENGTH]; //빨간색 뜨면 ctrl+스페이스 눌러서 스캐너설정
+
+    int pSize = 0; //변수명 선언한거
 
 
 
@@ -69,6 +83,33 @@ public class App_변경8 {
           System.out.printf("%d, %s, %s, %s, %s\n", // 출력 형식 지정
               no[i], name[i], email[i], tel[i], registeredDate[i]);
         }
+
+      } else if (input.equals("/project/add")) {
+        System.out.println("[프로젝트등록]"); //project/add 했을때 이 조건을 불러와야 하니깐 여기다 붙여넣기
+
+        System.out.print("번호? ");
+        pNo[pSize] = Integer.valueOf(keyboardScan.nextLine()); //변수 에러 뜸 그냥 가져오면!, 위에 메모리 변수명을 보고 
+
+        System.out.print("프로젝트명? ");
+        pTitle[pSize] = keyboardScan.nextLine();
+
+        System.out.print("내용? ");
+        pContent[pSize] = keyboardScan.nextLine();
+
+        System.out.print("시작일? ");
+        pStarDate[pSize] = Date.valueOf(keyboardScan.nextLine());
+
+        System.out.print("종료일? ");
+        pEndDate[pSize] = Date.valueOf(keyboardScan.nextLine());
+
+        System.out.print("만든이? ");
+        pOwner[pSize] = keyboardScan.nextLine();
+
+        System.out.print("팀원? ");
+        pMembers[pSize] = keyboardScan.nextLine();
+
+        pSize++;
+
       } else {
         System.out.println("실행할 수 없는 명령입니다.");
       }
