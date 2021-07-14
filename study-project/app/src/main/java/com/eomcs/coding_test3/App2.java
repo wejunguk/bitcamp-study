@@ -122,7 +122,7 @@ public class App2 {
 
       tSize++;
 
-    }  else if (input.equals("/task/list")) {
+    }  else if (input.equals("/tasks/list")) {
       System.out.println("[작업 목록]");
 
       for (int i = 0; i < tSize; i++) {

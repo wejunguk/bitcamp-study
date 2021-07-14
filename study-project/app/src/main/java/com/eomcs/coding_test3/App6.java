@@ -20,7 +20,7 @@ import java.util.Scanner;
 //6) 입력된 작업 데이터의 목록을 출력하는 코드를 별도의 메서드로 분리한다.
 //=> listTasks() 메서드 정의 및 관련된 코드를 가져오기
 //7) 사용자로부터 명령어를 입력 받는 코드를 별도의 메서드로 분리한다.
-//  => prompt() 메서드를 정의하고 
+//  => prompt() 메서드를 정의하고 관련된 코드를 가져오기 
 public class App6 {
   static Scanner keyboardScan = new Scanner(System.in);
 

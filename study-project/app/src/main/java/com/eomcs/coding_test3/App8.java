@@ -222,9 +222,9 @@ static void listMember() {
     //prompt();
     //-사용자로부터 문자열을 입력 받는 기능을 수행한다.
     // title:프롬포트의 메시지
-    //-리턴 값 : String - 사용자가 입력한 문자열
-    static Strimg prompt(String title) {
-      System.out.print("title ");  
+    //-리턴 값 : String - 사용자가 입력한 문자열 ->위에 리턴값에 String input 지정
+    static String prompt(String title) {
+      System.out.print(title);  
       String input = keyboardScan.nextLine();  
       return input;
     }

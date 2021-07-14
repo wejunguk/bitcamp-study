@@ -27,9 +27,9 @@ import java.util.Scanner;
 //9) prompt() 가 작업한 결과를 클래스 변수에 담지 말고 호출자에게 리턴한다.
 //  => prompt()를 실행한 후 사용자가 입력한 문자열을 리턴한다.
 //10) prompt() 의 기능을 더 세분화한다.
-//  =>promptString() : 사용자로부터 문자열을 입력 받아 리턴한다.
-//  =>promptInt() : 사용자로부터 숫자를 입력 받아 리턴한다.
-//  =>
+//   => promptString() : 사용자로부터 문자열을 입력 받아 리턴한다.
+//   => promptInt() : 사용자로부터 숫자를 입력 받아 리턴한다.
+//   => promptDate() : 사용자로부터 날짜를 입력 받아 리턴한다.
 //11) promptString, promptInt(), promptDate() 메서드의 코드를 리턴한다
 public class App10 {
   static Scanner keyboardScan = new Scanner(System.in);
@@ -221,19 +221,19 @@ static void listMember() {
             tNo[i], tContent[i], tDeadline[i], stateLabel, tOwner[i]);
       }
     }
-    //사용자로부터 문자열을 입력 받아 리턴한다.
-    static String promptString (String title) {
-      System.out.print("title ");  
-      return keyboardScan.nextLine();  
-      //=return input;
+    // 사용자로부터 문자열을 입력 받아 리턴한다.
+    static String promptString(String title) {
+      System.out.print(title);
+      return keyboardScan.nextLine();
     }
-    //사용자로부터 숫자를 입력 받아 리턴한다.
-    static Date promptInt (String title) {
-      System.out.print("title ");  
-      return Integer.parseInt(prompt(title)); 
+
+    // 사용자로부터 숫자를 입력 받아 리턴한다.
+    static int promptInt(String title) {
+      return Integer.parseInt(promptString(title));
     }
-    //사용자로부터 날짜를 입력 받아 리턴한다.
-    static Date promptInt (String title) {
-      return Date.valueOf(prompt(title)); 
+
+    // 사용자로부터 날짜를 입력 받아 리턴한다.
+    static Date promptDate(String title) {
+      return Date.valueOf(promptString(title));
     }
   }

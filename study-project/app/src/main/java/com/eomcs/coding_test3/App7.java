@@ -219,9 +219,10 @@ static void listMember() {
     }
     //String메소드를 실행하려면 title을 줘라, 그래야지 prompt를 실행할 수 있다.
     //프롬포트 안에 아무것도 없으면 그냥 호출하게 됨, String title을 주면 반드시 문자열로 호출,위에 prompt("명령> "); 이부분
-    static void prompt(String title) {
-      System.out.print("title ");  
-      input = keyboardScan.nextLine();  
+    static void prompt(String title) { //->prompt 변수 사용
+      System.out.print(title); 
+
+      input = keyboardScan.nextLine();  //return하면서 void->String을 리턴하게끔하자 ->사용자가 한줄을 치면 리턴한다.
     }
   }
 }
