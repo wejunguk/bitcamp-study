@@ -4,6 +4,7 @@ package com.eomcs.lang.ex07;
 //
 public class Exam0540 {
 
+  //void에 return 을 주면, 이 메소드 실행은 여기서 끝내! 라는 뜻/ void에 리턴값은 원래 주지 않음
   public static void main(String[] args) {
     // 학생의 이름과 국영수 점수를 입력 받아 총점과 평균을 출력하라
     // $ java -cp ./bin/main com.eomcs.lang.ex07.Exam0540 홍길동 100 100 90
@@ -24,7 +25,7 @@ public class Exam0540 {
 
     System.out.printf("이름: %s\n", args[0]);
     System.out.printf("총점: %d\n", sum);
-    System.out.printf("평균: %.1f\n", sum / 3f);
+    System.out.printf("평균: %.1f\n", sum / 3f); //
   }
 }
 

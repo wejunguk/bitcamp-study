@@ -12,7 +12,7 @@ public class Exam0610 {
     //
 
     // JVM 아규먼트의 값 꺼내기
-    // => System.getProperty("이름");
+    // => System.getProperty("이름"); ->값 저장
     //
     String value1 = System.getProperty("a");
     String value2 = System.getProperty("b");

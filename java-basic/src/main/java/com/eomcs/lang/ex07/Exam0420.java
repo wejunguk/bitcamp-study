@@ -5,14 +5,14 @@ package com.eomcs.lang.ex07;
 public class Exam0420 {
 
   static int[] getArray() {
-    int[] arr = new int[] {100, 200, 300};
-    return arr;
+    int[] arr = new int[] {100, 200, 300};//2)heap에 생성
+    return arr; //arr저장된 값 리턴
   }
 
   public static void main(String[] args) {
     int[] arr;
-    arr = getArray();
-    System.out.println(arr[1]); // 200
+    arr = getArray(); //1)getArry 호출 , 여기에 리턴
+    System.out.println(arr[1]); // 200 ->getArray에 만든 값을 사용
   }
 }
 
