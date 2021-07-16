@@ -19,6 +19,12 @@ public class Test004 {
           result++;
         }
       }
+
+      int i = 0; 
+
+      for (int i = 0;) {
+
+      }
     }
 
     return result;
