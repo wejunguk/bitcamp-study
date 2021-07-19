@@ -1,10 +1,14 @@
-package com.eomcs.pms;
+package com.eomcs.coding_test4;
 
 //1) 사용자로부터 입력 받는 일을 하는 메서드를 별도의 클래스로 분류한다.
 //4) 작업 정보를 다루는 메서드를 별도의 클래스로 분류한다.
-//5) 키보드 스캐너를 닫는 일은 그 스캐너를 갖고 있는 클래스에서 수행한다. ->프롬포트에 키보드를 다는다.
-//   => GRASP에서 Information Expert 설계 기법 적용
-public class App4 {
+public class App3 {
+
+
+
+
+  // 작업 정보
+
 
   public static void main(String[] args) {
 
@@ -39,10 +43,8 @@ public class App4 {
       System.out.println();
     }
 
-    // Prompt가 소유하고 관리하고 있는 자원을 닫으라고 명령한다.
-    Prompt.close();
+    Prompt.keyboardScan.close();
   }
-
 
 }
 
