@@ -1,5 +1,6 @@
 package com.eomcs.pms;
 
+import com.eomcs.pms.handler.BoardHandler;
 import com.eomcs.pms.handler.MemberHandler;
 import com.eomcs.pms.handler.ProjectHandler;
 import com.eomcs.pms.handler.TaskHandler;
@@ -9,10 +10,12 @@ public class App {
 
   public static void main(String[] args) {
 
+    BoardHandler boardHandler = new BoardHandler();
+
     while (true) {
       String input = Prompt.inputString("명령> ");
 
-      if (input.equals("exit") || input.equals(".quit")) {
+      if (input.equals("exit") || input.equals("quit")) {
         System.out.println("안녕!");
         break;
       } else if (input.equals("/member/add")) {
@@ -32,6 +35,12 @@ public class App {
 
       }  else if (input.equals("/task/list")) {
         TaskHandler.list();
+
+      } else if (input.equals("/board/add")) {
+        BoardHandler.add(boardHandler);
+
+      } else if (input.equals("/board/list")) {
+        BoardHandler.list(boardHandler);
 
       } else {
         System.out.println("실행할 수 없는 명령입니다.");
