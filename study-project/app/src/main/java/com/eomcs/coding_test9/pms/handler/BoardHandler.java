@@ -28,6 +28,7 @@ public class BoardHandler {
     //    board.viewCount = 0; // 인스턴스 변수는 생성되는 순간 기본 값이 0으로 설정된다.
 
     this.boards[this.size++] = board;
+
   }
 
   public void list() {
@@ -50,8 +51,7 @@ public class BoardHandler {
     Board board = null;
 
     for (int i = 0; i < this.size; i++) {
-      if (boards[i].no == no) {
-        board = boards[i];
+      if (board[i].no == no) {
         break;
       }
     }
@@ -65,40 +65,25 @@ public class BoardHandler {
     System.out.printf("내용: %s\n", board.content);
     System.out.printf("작성자: %s\n", board.writer);
     System.out.printf("등록일: %s\n", board.registeredDate);
-    System.out.printf("조회수: %d\n", ++board.viewCount);
+    System.out.printf("조회수: %d\n", board.viewCount);
   }
 
-  public void update() {
-    System.out.println("[게시글 변경]");
-    int no = Prompt.inputInt("번호? ");
+  //System.out.printf("제목(%s)? \n", board.title);
+  String label = String.format("제목(%S)?", board.title);
+  String title = Prompt.inputString(label);
 
-    Board board = null;
 
-    for (int i = 0; i < this.size; i++) {
-      if (boards[i].no == no) {
-        board = boards[i];
-        break;
-      }
-    }
+  //System.out.printf("내용: \n", board.content);
+  lebel = String.format("내용(%s)", board.content);
+  String content = Prompt.inputString(label)); // 임시변수가 놓을 자리에 쿼리로 대신해라!
+  // = String content = Prompt.inputString(String.format("내용(%s)", board.content)));
 
-    if (board == null) {
-      System.out.println("해당 번호의 게시글이 없습니다.");
-      return;
-    }
+  //equalsIngnoreCase -> 대소문자구별없이 진행함
 
-    String title = Prompt.inputString(String.format("제목(%s)? ", board.title));
-    String content = Prompt.inputString(String.format("내용(%s)? ", board.content));
+  board.title = title;
+  board.content = content;
+}
 
-    String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
-    if (input.equalsIgnoreCase("n") || input.length() == 0) {
-      System.out.println("게시글 변경을 취소하였습니다.");
-      return;
-    }
-
-    board.title = title;
-    board.content = content;
-    System.out.println("게시글을 변경하였습니다.");
-  }
 
 }
 

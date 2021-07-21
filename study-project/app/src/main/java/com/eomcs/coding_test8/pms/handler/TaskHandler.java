@@ -42,12 +42,12 @@ public class TaskHandler {
   }
 
   //다른 패키지에 있는 App 클래스가 다음 메서드를 호출할 수 있도록 공개한다.
-  public void list() {
+  public void list(MemberHandler memberHandler) {
     System.out.println("[작업 목록]");
 
     for (int i = 0; i < this.size; i++) {
       String stateLabel = null;
-      switch (tasks[i].status) {
+      switch (this.tasks[i].status) {
         case 1:
           stateLabel = "진행중";
           break;
