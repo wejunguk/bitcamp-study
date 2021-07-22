@@ -1,6 +1,6 @@
 package com.eomcs.oop.ex00;
 
-public class Exam200 {
+public class Exam0200 {
   public static void main(String[] args) {
     // 인스턴스 변수 테스트
 

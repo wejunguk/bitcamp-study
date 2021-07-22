@@ -1,6 +1,6 @@
 package com.eomcs.oop.ex00;
 
-public class Exam100 {
+public class Exam0100 {
   public static void main(String[] args) {
     // 스태틱 변수 테스트
     test1 ();
