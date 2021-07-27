@@ -33,7 +33,7 @@ public class Exam0310 {
         Math m = new Math();
         int result = m.abs(value);
      */
-
+    java.lang.Math.cos(3.1);
     System.out.printf("절대값=%d\n", result);
   }
 }

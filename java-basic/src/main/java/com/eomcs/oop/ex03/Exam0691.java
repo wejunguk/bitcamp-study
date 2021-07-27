@@ -4,9 +4,10 @@ package com.eomcs.oop.ex03;
 public class Exam0691 {
 
   static class A {
-    static int a = 7;
+    static int a = 7; // static int a;
 
     static {
+      // int a = 7;
       System.out.println("A.static{}");
       a += B.b;
     }

@@ -1,8 +1,10 @@
 // 스태틱 초기화 블록(static initializer) - 레퍼런스 선언
 package com.eomcs.oop.ex03;
 
+// Exam0610 : 탑 클래스 
 public class Exam0610 {
 
+  // A : 중첩변수(네스티드 변수)
   public static class A {
     static int a;
 
@@ -26,6 +28,7 @@ public class Exam0610 {
     // 클래스가 로딩되는 경우,
     // - 레퍼런스를 선언할 때는 클래스가 로딩되지 않는다.
     // - 그래서 스태틱 초기화 블록이 실행되지 않는다.
+    // 로딩 시 클래스 파일 생성을 안함 -> 이 래퍼런스를 사용하지 않는다.
     A obj1;
     A obj2;
 

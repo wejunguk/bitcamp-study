@@ -11,6 +11,8 @@ public class Exam0740 {
     // 여러 개의 인스턴스 초기화 블록이 있을 때,
     // - 선언된 순서대로 생성자의 앞 부분에 삽입된다.
     // - 바이트코드(Exam0740$A.class)를 확인해 보라!
+    // 인스턴스 초기화는 어차피 생성자 안에 생성되기 때문에
+    // 여러개의 인스턴스를 만들 필요가 없어!
     {
       this.a = 101;
       System.out.println("첫 번째 인스턴스 초기화 블록");
@@ -40,7 +42,6 @@ public class Exam0740 {
       b = 200;
       c = 300;
     }
-
   }
 
   public static void main(String[] args) {

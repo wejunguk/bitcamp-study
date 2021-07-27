@@ -12,6 +12,8 @@ public class Exam0420 {
     float average;
 
     // 생성자가 한 개라도 있으면 컴파일러는 기본 생성자를 만들어주지 않는다.
+    // 생성자를 만들려면? 인스턴스 변수를 만든 후에, 
+    // 
     Score(String name, int kor, int eng, int math) {
       System.out.println("Score(String,int,int,int) 호출!");
 
