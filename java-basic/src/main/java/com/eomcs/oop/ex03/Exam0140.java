@@ -4,7 +4,7 @@ package com.eomcs.oop.ex03;
 
 public class Exam0140 {
   static class A {
-    static int v1; //staitc 붙은 변수는 자동 0으로 초기화 됨
+    static int v1; //static 붙은 변수는 자동 0으로 초기화 됨
     int v2; //instance 변수는 자동 0으로 초기화 됨 / boolean은 false로 초기화
   }
 
