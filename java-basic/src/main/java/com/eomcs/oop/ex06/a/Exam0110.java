@@ -20,6 +20,7 @@ public class Exam0110 {
     // 이런 규칙에 따라, 다음 vehicle2 변수는 Vehicle 객체 뿐만아니라
     // Bike, Car, Sedan, Truck 객체까지 다양한 서브클래스의 객체를 가리킬 수 있다.
     // 그래서 vehicle2를 "다형적 변수"의 기능을 갖고 있다 말한다.
+    //[vehicle2 => 다형적변수(polymorphic variables)]
     Vehicle vehicle2 = null;
     vehicle2 = bike; // OK
     vehicle2 = car; // OK

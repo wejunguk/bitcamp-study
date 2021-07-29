@@ -21,7 +21,7 @@ public class Exam0111 {
         (byte)0x6c, // l
         (byte)0x6f  // o 
     };
-    String s3 = new String(bytes);
+    String s3 = new String(bytes); // String(byte[]) 생성자를 호출하여 인스턴스 초기화
 
     System.out.printf("%s, %s, %s\n", s1, s2, s3);
   }
