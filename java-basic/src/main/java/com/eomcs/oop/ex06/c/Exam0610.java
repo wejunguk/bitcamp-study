@@ -3,7 +3,7 @@ package com.eomcs.oop.ex06.c;
 
 public class Exam0610 {
 
-  static class C {}
+  static class A {}
   static class B extends A {}
   static class C extends B {}
 
