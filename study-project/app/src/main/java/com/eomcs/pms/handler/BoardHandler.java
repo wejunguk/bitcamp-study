@@ -6,13 +6,14 @@ import com.eomcs.util.Prompt;
 
 public class BoardHandler {
 
+  // 모든 게시판의 최대 배열 개수가 같기 때문에 다음 변수는 
+  // 그냥 static 필드로 남겨둔다.
   static final int MAX_LENGTH = 5;
 
+  // 게시판 마다 따로 관리해야 하기 때문에 인스턴스 필드로 전환한다.
+  // => static 옵션을 뺀다.
   Board[] boards = new Board[MAX_LENGTH];
   int size = 0;
-
-  Node head;
-  Node tail;
 
   public void add() {
     System.out.println("[새 게시글]");
@@ -25,40 +26,32 @@ public class BoardHandler {
     board.writer = Prompt.inputString("작성자? ");
     board.registeredDate = new Date(System.currentTimeMillis());
 
-    // 새 노드를 만든다. 생성자를 호출할 때, 노드에 담을 Board 객체 주소를 넘긴다. 
-    Node node = new Node(board);
+    if (this.size == this.boards.length) {
 
-    if (head == null) {
-      tail = head = node;
-    } else {
-      // 기존에 tail이 가리키는 마지막 노드의 next 변수에 새 노드 주소를 저장한다.
-      tail.next = node;
+      Board[] arr = new Board[this.boards.length + (this.boards.length >> 1)];
 
-      // 새로 만든 노드를 마지막 노드로 설정한다. 
-      tail = node;
+      for (int i = 0; i < this.size; i ++) {
+        arr [i] = this.boards[i];
+      }
+
+      this.boards = arr;
+      System.out.println("새 Board[] 배열 객체를 만듦");
+
     }
-
-    size++;
+    this.boards[this.size++] = board;
   }
 
   public void list() {
     System.out.println("[게시글 목록]");
-    if (head == null) {
-      return;
-    }
-
-    Node node = head;
-
-    do {
+    for (int i = 0; i < this.size; i++) {
       System.out.printf("%d, %s, %s, %s, %d, %d\n", 
-          node.board.no, 
-          node.board.title, 
-          node.board.writer,
-          node.board.registeredDate,
-          node.board.viewCount, 
-          node.board.like);
-      node = node.next;
-    } while (node != null);
+          this.boards[i].no, 
+          this.boards[i].title, 
+          this.boards[i].writer,
+          this.boards[i].registeredDate,
+          this.boards[i].viewCount, 
+          this.boards[i].like);
+    }
   }
 
   public void detail() {
@@ -130,15 +123,11 @@ public class BoardHandler {
   }
 
   private Board findByNo(int no) {
-    Node node = head;
-
-    while (node != null) {
-      if (node.board.no == no) {
-        return node.board;
+    for (int i = 0; i < this.size; i++) {
+      if (this.boards[i].no == no) {
+        return this.boards[i];
       }
-      node = node.next;
     }
-
     return null;
   }
 

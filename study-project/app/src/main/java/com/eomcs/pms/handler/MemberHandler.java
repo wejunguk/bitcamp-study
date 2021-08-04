@@ -26,11 +26,16 @@ public class MemberHandler {
 
     if (this.size == this.members.length) {
       Member[] arr = new Member[this.members.length + (this.members.length >> 1)];
-      for (int i = 0; i < this.size; i++) {
-        arr[i] = this.members[i];
+
+      for (int i = 0; i < this.size; i ++) {
+        arr [i] = this.members[i];
       }
+
       this.members = arr;
+      System.out.println("새 Member[] 배열 객체를 만듦");
     }
+
+
     this.members[this.size++] = member;
   }
 

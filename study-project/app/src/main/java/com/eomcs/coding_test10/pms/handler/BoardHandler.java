@@ -25,8 +25,31 @@ public class BoardHandler {
     board.content = Prompt.inputString("내용? ");
     board.writer = Prompt.inputString("작성자? ");
     board.registeredDate = new Date(System.currentTimeMillis());
-    //    board.viewCount = 0; // 인스턴스 변수는 생성되는 순간 기본 값이 0으로 설정된다.
 
+    //만약에 현재 등록된 갯수와 this.boards.length가 같다면(꽉 찼다면) 새 배열을 만들어라
+    if (this.size == this.boards.length) {
+      // Board의 새 배열을 만들어라 new Board인데 this.boards.length(this가 가르키는 인스턴스의
+      // 배열의 길이 + this.boards.length를 옆으로 50% 증가 = /2
+      // 원래 5 /2 하면 2.5->2(정수와 정수의 연산결과는 정수)
+      // this.boards.length/2 의 값이 2인 상태
+      // 기존 배열 보다 50% 더 큰 배열을 만든다.
+      Board[] arr = new Board[this.boards.length + (this.boards.length >> 1)]; // 나누기 2 하는것 보다 더 빠른 실행속도를 나타내는 방법
+      // 비트이동 연산자 -> >> 1 옆으로 1 이동해라
+
+      // 기존 배열의 값을 새 배열로 복사한다.
+      // int i는 0에서 this.size만큼 증가
+      // 새 배열의 i 번째에 this.boars[i]복사 = 기존 배열의 i번째 값을 복사
+      for (int i = 0; i < this.size; i ++) {
+        arr [i] = this.boards[i];
+      }
+
+      // 기존 배열 대신 새 배열 주소를 저장한다.
+      // 이렇게 함으로써 기존 배열은 가비지가 될 것이다.
+      // this.boards의 인스턴스 배열에 새 배열을 저장
+      this.boards = arr;
+      System.out.println("새 Board[] 배열 객체를 만듦");
+
+    }
     this.boards[this.size++] = board;
   }
 
@@ -47,14 +70,7 @@ public class BoardHandler {
     System.out.println("[게시글 상세보기]");
     int no = Prompt.inputInt("번호? ");
 
-    Board board = null;
-
-    for (int i = 0; i < this.size; i++) {
-      if (this.boards[i].no == no) {
-        board = this.boards[i];
-        break;
-      }
-    }
+    Board board = findByNo(no);
 
     if (board == null) {
       System.out.println("해당 번호의 게시글이 없습니다.");
@@ -72,14 +88,7 @@ public class BoardHandler {
     System.out.println("[게시글 변경]");
     int no = Prompt.inputInt("번호? ");
 
-    Board board = null;
-
-    for (int i = 0; i < this.size; i++) {
-      if (this.boards[i].no == no) {
-        board = this.boards[i];
-        break;
-      }
-    }
+    Board board = findByNo(no);
 
     if (board == null) {
       System.out.println("해당 번호의 게시글이 없습니다.");
@@ -104,18 +113,9 @@ public class BoardHandler {
     System.out.println("[게시글 삭제]");
     int no = Prompt.inputInt("번호? ");
 
-    int boardIndex = -1;
+    int index = indexOf(no);
 
-    // Board 인스턴스가 들어 있는 배열을 뒤져서
-    // 게시글 번호와 일치하는 Board 인스턴스를 찾는다. 
-    for (int i = 0; i < this.size; i++) {
-      if (this.boards[i].no == no) {
-        boardIndex = i;
-        break;
-      }
-    }
-
-    if (boardIndex == -1) {
+    if (index == -1) {
       System.out.println("해당 번호의 게시글이 없습니다.");
       return;
     }
@@ -126,13 +126,32 @@ public class BoardHandler {
       return;
     }
 
-    for (int i = boardIndex + 1; i < this.size; i++) {
+    for (int i = index + 1; i < this.size; i++) {
       this.boards[i - 1] = this.boards[i];
     }
     this.boards[--this.size] = null;
 
     System.out.println("게시글을 삭제하였습니다.");
   }
+
+  private Board findByNo(int no) {
+    for (int i = 0; i < this.size; i++) {
+      if (this.boards[i].no == no) {
+        return this.boards[i];
+      }
+    }
+    return null;
+  }
+
+  private int indexOf(int no) {
+    for (int i = 0; i < this.size; i++) {
+      if (this.boards[i].no == no) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
 
 }
 
