@@ -1,15 +1,11 @@
 package com.eomcs.pms.handler;
 
 import java.sql.Date;
-import com.eomcs.coding_test11.pms.handler.BoardList;
 import com.eomcs.pms.domain.Board;
 import com.eomcs.util.Prompt;
 
 public class BoardHandler {
 
-
-
-  //배열 대신 boardList를 만들어줌
   BoardList boardList = new BoardList();
 
   public void add() {
@@ -23,17 +19,17 @@ public class BoardHandler {
     board.writer = Prompt.inputString("작성자? ");
     board.registeredDate = new Date(System.currentTimeMillis());
 
-    // 저장하고 싶으면 boardList에 저장해달라고 해라
     boardList.add(board);
-
   }
 
   public void list() {
     System.out.println("[게시글 목록]");
+
     Board[] list = boardList.toArray();
+
     for (Board board : list) {
       System.out.printf("%d, %s, %s, %s, %d, %d\n", 
-          board.no, // board에 저장된 no 값
+          board.no, 
           board.title, 
           board.writer,
           board.registeredDate,
@@ -106,10 +102,11 @@ public class BoardHandler {
 
     System.out.println("게시글을 삭제하였습니다.");
   }
-
-
-
-
-
-
 }
+
+
+
+
+
+
+
