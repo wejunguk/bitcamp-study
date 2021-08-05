@@ -1,15 +1,12 @@
-package com.eomcs.pms.handler;
+package com.eomcs.coding_test11.pms.handler;
 
 import java.sql.Date;
-import com.eomcs.coding_test11.pms.handler.BoardList;
 import com.eomcs.pms.domain.Board;
 import com.eomcs.util.Prompt;
 
 public class BoardHandler {
 
-
-
-  //배열 대신 boardList를 만들어줌
+  // 배열 대신 boardList를 만들어줌
   BoardList boardList = new BoardList();
 
   public void add() {
@@ -113,3 +110,10 @@ public class BoardHandler {
 
 
 }
+
+
+
+
+
+
+
