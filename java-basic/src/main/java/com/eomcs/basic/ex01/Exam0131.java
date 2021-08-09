@@ -4,7 +4,7 @@ package com.eomcs.basic.ex01;
 
 
 public class Exam0131 {
-  
+
   public static void main(String[] args) {
     My obj1 = new My();
     obj1.name = "홍길동";
@@ -13,7 +13,7 @@ public class Exam0131 {
     obj1.email = "hong@test.com";
     obj1.gender = 1;
     obj1.working = false;
-    
+
     My obj2 = new My();
     obj2.name = "홍길동";
     obj2.age = 20;
@@ -21,7 +21,7 @@ public class Exam0131 {
     obj2.email = "hong@test.com";
     obj2.gender = 1;
     obj2.working = false;
-    
+
     System.out.println(obj1 == obj2);
     System.out.println(obj1.equals(obj2));
 
@@ -31,7 +31,7 @@ public class Exam0131 {
     // => String와 wrapper 클래스는 equals() 오버라이딩 하였다.
     // => StringBuffer 클래스는 equals()를 오버라이딩 하지 않았다.
   }
-  
+
   static class My {
     String name;
     int age;
@@ -39,10 +39,13 @@ public class Exam0131 {
     String email;
     int gender;
     boolean working;
-    
+
+
+
+
     @Override
     public boolean equals(Object obj) {
-      if (this == obj)
+      if (this == obj) // this엔 null이 들어갈 수 없다.
         return true;
       if (obj == null)
         return false;
@@ -54,7 +57,7 @@ public class Exam0131 {
       if (email == null) {
         if (other.email != null)
           return false;
-      } else if (!email.equals(other.email))
+      } else if (!email.equals(other.email)) // 여기서 equals 는 문자열이 같은지 비교
         return false;
       if (gender != other.gender)
         return false;
@@ -72,7 +75,6 @@ public class Exam0131 {
         return false;
       return true;
     }
-    
 
   }
 

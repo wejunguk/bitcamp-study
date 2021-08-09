@@ -30,6 +30,10 @@ class A3Sub extends A3 {
 public class Exam03 {
   public static void main(String[] args) {
     A3 obj;
+    // A3Sub obj 라고 안하는 이유?
+    // 이러면  obj = new A3Sub();만 들어갈수있는데
+    // A3 obj; 라고하면
+    // A3Sub의 자식까지 커버할 수 있음
 
     // 추상 클래스의 인스턴스는 생성 불가!
     //    obj = new A3(); // Error!
@@ -49,5 +53,10 @@ public class Exam03 {
 
     // - 물론 실제 인스턴스 타입으로 형벼환 후에는 가능한다.
     ((A3Sub)obj).m2();
+  }
+
+  static void test(A3 obj) {
+    obj.m1();
+    // obj는 A3 의 레퍼런스이다.
   }
 }

@@ -11,8 +11,8 @@ abstract class Letter {
   }
 
   // 수퍼 클래스에서 기능이 어떻게 동작하는지 정의한다.
-  public void print() {
-    this.printHeader();
+  public void print() { // <- 템플릿 메서드(디자인패 패턴)
+    this.printHeader(); // this : loveLetter의 객체 주소
     System.out.println(this.content);
     System.out.println();
     System.out.printf("              From %s!\n", this.getSign());
