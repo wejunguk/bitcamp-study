@@ -21,7 +21,7 @@ public class Printer2Adapter implements Printer2 {
     // 직접 Printer 역할을 하는 것이 아니기 때문에
     // 아답터에게 print()라는 명령을 내리면,
     // 생성자에서 받은 기존 프린터 객체를 실행시킨다.
-    originalPrinter.print(text);
+    originalPrinter.print(text); // print => 중간에서 중계하는 역활만 함
   }
 
   @Override

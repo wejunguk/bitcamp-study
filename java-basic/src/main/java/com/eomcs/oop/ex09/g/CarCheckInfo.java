@@ -1,5 +1,10 @@
-package com.eomcs.oop.ex09.h;
+package com.eomcs.oop.ex09.g;
 
+// 이 인터페이스의 용도
+// - 자동차를 점검할 때 호출하는 메서드 규칙을 정의하였다.
+// - 자동차를 점검할 때 체크 사항을 정의하였다.
+// - 따라서 이 규칙에 따라 만든 자동차라면 자동 점검을 수행할 수 있다.
+// 
 public interface CarCheckInfo {
   int getGas();
   int getBrakeOil();
