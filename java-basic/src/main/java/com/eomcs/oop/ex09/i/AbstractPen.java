@@ -1,5 +1,5 @@
 // 추상 클래스 활용 - 서브 클래스를 위해 미리 인터페이스의 일부 메서드를 구현하는 역할
-package com.eomcs.oop.ex09.j;
+package com.eomcs.oop.ex09.i;
 
 
 // 서브 클래스를 위해 인터페이스의 일부 메서드를 구현하는 용도로 추상 클래스를 많이 사용한다.
@@ -24,7 +24,7 @@ public abstract class AbstractPen implements Pen {
     this.use = false;
   }
 
-  // write()는 어차피 서브 클래스에서 자신의 특성에 맞춰서 구현할 것이기 때문에
+  // write()는 어차피 서브 클래스에서 자신의 특성에 맞춰서 구현해야 하는 것이기 때문에
   // 수퍼 클래스에서는 구현하지 않는다.
 }
 

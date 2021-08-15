@@ -17,5 +17,3 @@ public interface Computer2 extends Computer {
 
 
 
-
-

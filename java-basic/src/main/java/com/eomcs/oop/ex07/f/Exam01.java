@@ -18,10 +18,7 @@ public class Exam01 {
   }
 
   static void display(Sorter sorter, int[] values) {
-
     sorter.sort(values);
-
-    // 정렬된 값을 출력한다.
     for (int  value : values) {
       System.out.print(value + ",");
     }

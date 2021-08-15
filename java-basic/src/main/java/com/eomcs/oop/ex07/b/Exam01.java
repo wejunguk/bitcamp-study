@@ -25,9 +25,9 @@ public class Exam01 {
   public static void main(String[] args) {
 
     int[] values = createRandomNumbers(100000);
-    int[] values2 = Arrays.copyOf(values, values.length); // values를 그대로 복사
+    int[] values2 = Arrays.copyOf(values, values.length);
 
-    BubbleSort s1 = new BubbleSort(); // 오름차순(점점 더 큰 수로 정렬)
+    BubbleSort s1 = new BubbleSort();
     QuickSort s2 = new QuickSort();
 
     // 두 개의 정렬 객체가 서로 다른 타입이기 때문에

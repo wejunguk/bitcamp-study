@@ -1,12 +1,8 @@
 package com.eomcs.oop.ex07.f;
 
-// 기존의 정렬 클래스처럼 동일한 방법으로 사용하려면
-// Sorter를 상속 받아 같은 타입으로 묶여야 한다.
-// 그래서 Sorter 를 상속 받았다.
-//
 public class MergeSort implements Sorter {
 
-  // 인터페이스의 추상 메서드를 구현하는 것도
+  // 인터페이스의 추상 메서드를 구현하는 것도 
   // "오버라이딩" 이라 부른다.
   @Override
   public void sort(int[] values) {
