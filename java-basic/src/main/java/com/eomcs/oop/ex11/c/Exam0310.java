@@ -2,12 +2,16 @@
 package com.eomcs.oop.ex11.c;
 
 class C {
+  int a;
+  int b;
+
   static void m1() {
     // 스태틱 멤버는 인스턴스 멤버를 사용할 수 없다.
     //
     X obj; // 레퍼런스 선언은 가능!
 
     //    obj = new X(); // 컴파일 오류! 인스턴스 생성 불가능!
+    // (스태틱 주소에는 인스턴스변수가 없어서this 를 줄 수 없음)
 
     // 이유?
     // - 인스턴스 멤버를 사용하려면 인스턴스 주소가 있어야 한다.
@@ -23,6 +27,8 @@ class C {
     X obj2 = new X(); // 인스턴스 필드나 메서드와 마찬가지로 this를 생략할 수 있다.
     obj2.test();
 
+    a = 100;
+    b = 200; // this 생략
   }
 
   class X {

@@ -22,7 +22,7 @@ class C2 {
         //System.out.printf("v1 = %d\n", C2.this.v1); // 컴파일 오류!
       }
     }
-    X obj = new X();
+    X obj = new X(); // 컴파일 해도 같다. ===> new X();
     obj.f();
   }
 }

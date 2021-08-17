@@ -1,11 +1,11 @@
-// 인스턴스 메서드에 정의된 local class : 메서드에 선언된 로컬 변수 접근하기
+// 로컬 클래스에서 메서드에 선언된 로컬변수 만들기
 package com.eomcs.oop.ex11.d;
 
 class D3 {
   void m1() {
     final int v1 = 1;
-    int v2 = 2;
-    int v3 = 3;
+    int v2 = 2; 
+    int v3 = 3; // 한번만 값을 할당할 수 있다.
     v3 = 30;
 
     class X {

@@ -7,7 +7,7 @@ public class Exam0440 {
     void print();
   }
 
-  void m1(A obj) {
+  static void m1(A obj) {
     obj.print();
   }
 
@@ -21,7 +21,7 @@ public class Exam0440 {
         System.out.println("XXXXX");
       }
     }
-    r.m1(new X());
+    m1(new X());
 
     // 2) 익명 클래스 만들기
     A obj = new A() {
