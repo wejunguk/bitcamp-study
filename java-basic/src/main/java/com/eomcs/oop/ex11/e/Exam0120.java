@@ -1,4 +1,4 @@
-// anonymous class : 클래스를 상속받은 이
+// anonymous class : 클래스를 상속 받은 익명 클래스 정의
 package com.eomcs.oop.ex11.e;
 
 public class Exam0120 {
@@ -19,6 +19,5 @@ public class Exam0120 {
 
     A obj = new My();
     obj.print();
-
   }
 }

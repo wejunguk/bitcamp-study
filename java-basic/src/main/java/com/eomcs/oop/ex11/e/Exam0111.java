@@ -1,4 +1,4 @@
-// anonymous class : 로컬 클래스 vs 익명 클래스
+// anonymous class : 인터페이스를 구현한 익명 클래스 정의
 package com.eomcs.oop.ex11.e;
 
 public class Exam0111 {
@@ -9,21 +9,6 @@ public class Exam0111 {
   }
 
   public static void main(final String[] args) {
-
-    // 1) 로컬 클래스로 인터페이스 구현하기
-    class My implements A { //main안에 A규칙을 따라는 클래스 My를 만든다.
-      String name = "홍길동"; 
-
-      @Override
-      public void print() {
-        System.out.printf("Hello, %s!\n", this.name);
-      }
-    }
-
-    A obj = new My();
-    obj.print();
-
-    System.out.println("----------------------");
 
     // 2) 익명 클래스로 인터페이스 구현하기
     // => 인스턴스를 한 번 만 생성할 것이라면,
@@ -39,10 +24,9 @@ public class Exam0111 {
     A obj2 = new A() {
       @Override
       public void print() {
-        System.out.println("Hello");
+        System.out.println("Hello!");
       }
     };
-
     obj2.print();
   }
 }

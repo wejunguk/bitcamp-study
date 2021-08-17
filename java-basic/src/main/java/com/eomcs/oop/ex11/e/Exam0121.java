@@ -1,4 +1,4 @@
-// anonymous class : 클래스를 상속받은 이
+// anonymous class : 클래스를 상속 받은 익명 클래스 정의
 package com.eomcs.oop.ex11.e;
 
 public class Exam0121 {
@@ -9,19 +9,6 @@ public class Exam0121 {
   }
 
   public static void main(final String[] args) {
-    // 1) 로컬 클래스로 서브 클래스 만들기
-    class My extends A {
-      @Override
-      public void print() {
-        System.out.println("Hello!");
-      }
-    }
-
-    A obj = new My();
-    obj.print();
-
-    System.out.println("----------------------");
-
     // 2) 익명 클래스로 서브 클래스 만들기
     // => 인스턴스를 한 번 만 생성할 것이라면,
     //    로컬 클래스로 정의하는 것 보다 익명 클래스로 정의하는 것이 더 낫다.
@@ -36,7 +23,7 @@ public class Exam0121 {
     A obj2 = new A() {
       @Override
       void print() {
-        System.out.println("HEllo");
+        System.out.println("Hello!");
       }
     };
     obj2.print();
