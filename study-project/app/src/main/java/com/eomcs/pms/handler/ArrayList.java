@@ -1,11 +1,10 @@
 package com.eomcs.pms.handler;
 
-public class ArrayList implements List {
+public class ArrayList extends AbstractList {
 
   static final int MAX_LENGTH = 5;
 
   Object[] list = new Object[MAX_LENGTH];
-  int size = 0;
 
   public void add(Object obj) {
     if (size == list.length) {
@@ -32,10 +31,6 @@ public class ArrayList implements List {
       return false;
     }
 
-    for (int i = index + 1; i < this.size; i++) {
-      this.list[i - 1] = this.list[i];
-    }
-    this.list[--this.size] = null;
 
     return true;
   }
@@ -47,6 +42,32 @@ public class ArrayList implements List {
       }
     }
     return -1;
+  }
+
+  public Object get(int index) {
+    if(index < 0 || index >= this.size) { //유효하지 않은 인덱스인 경우, 에러를 띄움
+      return null;
+    }
+    return this.list[index];
+  }
+
+  @Override
+  public Object remove(int index) {  
+
+    if (index < 0 || index >= this.size) { // 인덱스가 무효하다면
+      return null;
+    }
+
+    Object deleted = this.list[index]; // 삭제할 항목 저장
+
+    for (int i = index + 1; i < this.size; i++) {
+      this.list[i - 1] = this.list[i];
+    }
+    this.list[--this.size] = null;
+
+    return deleted;
+    // 삭제한 항목 리턴
+    // remove 메서드는 일단 리턴 , 삭제한걸 사용할지 안할지 파라미터가 정함
   }
 
 }
