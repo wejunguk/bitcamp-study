@@ -8,7 +8,7 @@ import com.eomcs.util.Prompt;
 // 
 public class MenuGroup extends Menu {
 
-  // 메뉴의 bread crumb 목록 보관
+  // 메누의 bred crumb 목록 보관
   // 모든 메뉴가 공유할 객체이기 때문에 스태틱 멤버로 선언한다.
   static Stack breadCrumb = new Stack();
 
@@ -106,26 +106,17 @@ public class MenuGroup extends Menu {
       this.childs[menuNo - 1].execute();
     }
   }
-
-  private String getBreadCrumb() {
+  private String getBreadCrumb( ) {
     String path = "";
 
     for (int i = 0; i < breadCrumb.size(); i++) {
       if (path.length() > 0) {
         path += " / ";
       }
-      Menu menu = (Menu) breadCrumb.get(i); 
+      Menu menu = (Menu) breadCrumb.get(i);
       path += menu.title;
     }
-
     return path;
   }
 
 }
-
-
-
-
-
-
-

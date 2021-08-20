@@ -31,10 +31,6 @@ public class ArrayList extends AbstractList {
       return false;
     }
 
-    for (int i = index + 1; i < this.size; i++) {
-      this.list[i - 1] = this.list[i];
-    }
-    this.list[--this.size] = null;
 
     return true;
   }
@@ -48,16 +44,15 @@ public class ArrayList extends AbstractList {
     return -1;
   }
 
-  @Override
   public Object get(int index) {
-    if (index < 0 || index >= this.size) { // 유효하지 않은 인덱스인 경우
+    if(index < 0 || index >= this.size) { //유효하지 않은 인덱스인 경우, 에러를 띄움
       return null;
     }
     return this.list[index];
   }
 
   @Override
-  public Object remove(int index) {
+  public Object remove(int index) {  
 
     if (index < 0 || index >= this.size) { // 인덱스가 무효하다면
       return null;
@@ -70,14 +65,9 @@ public class ArrayList extends AbstractList {
     }
     this.list[--this.size] = null;
 
-    return deleted; // 삭제한 항목 리턴
+    return deleted;
+    // 삭제한 항목 리턴
+    // remove 메서드는 일단 리턴 , 삭제한걸 사용할지 안할지 파라미터가 정함
   }
+
 }
-
-
-
-
-
-
-
-
