@@ -58,7 +58,7 @@ public class Exam0221 {
     list.add(m2);
     list.add(m3);
 
-    Member[] arr = list.toArray(new Member[list.size()]);
+    Member[] arr = list.toArray(new Member[list.size()]); // list 갯수만큼 멤버를 만든다.
     for (Member m : arr) {
       System.out.printf("이름: %s, 나이: %d\n", m.name, m.age);
     }
