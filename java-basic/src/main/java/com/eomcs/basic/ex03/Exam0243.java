@@ -59,8 +59,6 @@ public class Exam0243 {
     list.add(m3);
 
     // lambda 문법으로 Consumer 구현체 만들기
-    // 추상클래스에선 적용 못함
-    // 메서드 1개 짜리 interface에서만 적용
     list.forEach(m -> System.out.printf("이름: %s, 나이: %d\n", m.name, m.age));
   }
 }

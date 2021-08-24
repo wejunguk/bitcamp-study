@@ -1,7 +1,6 @@
 // 목록 조회: java.util.Collection의 forEach() 사용법
 package com.eomcs.basic.ex03;
 
-// 240을 익명클래스로 만듬
 import java.util.ArrayList;
 import java.util.function.Consumer;
 
