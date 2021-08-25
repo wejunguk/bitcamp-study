@@ -4,6 +4,7 @@ package com.eomcs.basic.ex05;
 import java.util.Iterator;
 import java.util.Stack;
 
+// poll() 사용(입력한 순서대로 꺼냄)
 public class Exam0160 {
 
   public static void main(String[] args) {
