@@ -2,18 +2,26 @@ package com.eomcs.pms.handler;
 
 import java.util.List;
 import com.eomcs.pms.domain.Board;
+import com.eomcs.util.Prompt;
 
-public class BoardListHandler extends AbstractBoardHandler {
+public class BoardSearchHandler extends AbstractBoardHandler {
 
-  public BoardListHandler(List<Board> boardList) {
+  public BoardSearchHandler(List<Board> boardList) {
     super(boardList);
   }
 
   @Override
   public void execute() {
-    System.out.println("[게시글 목록]");
+    System.out.println("[게시글 검색]");
+
+    String input = Prompt.inputString("검색어? ");
 
     for (Board board : boardList) {
+      if (!board.getTitle().contains(input) &&
+          !board.getContent().contains(input) &&
+          !board.getWriter().getName().contains(input)) {
+        continue;
+      }
       System.out.printf("%d, %s, %s, %s, %d, %d\n", 
           board.getNo(), 
           board.getTitle(), 
