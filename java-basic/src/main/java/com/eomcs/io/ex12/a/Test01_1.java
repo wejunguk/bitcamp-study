@@ -18,7 +18,7 @@ public class Test01_1 {
     Score s3 = new Score("유관순", 80, 80, 80);
 
     FileOutputStream out0 = new FileOutputStream("temp/score.data");
-    BufferedOutputStream out1 = new BufferedOutputStream(out0);
+    BufferedOutputStream out1 = new BufferedOutputStream(out0); // 데코레이터
     DataOutputStream out = new DataOutputStream(out1);
 
     out.writeUTF(s1.getName());
@@ -39,8 +39,10 @@ public class Test01_1 {
     // 버퍼를 사용할 때 주의하라!
     // => 버퍼는 꽉 찼을 때 자동으로 출력된다.
     // => 따라서 출력을 마무리할 때는 반드시 버퍼에 남아 있는 데이터를 강제로 출력해야 한다.
+    // ) 버퍼를 사용하면 꼭 이걸로 강제로 출력하기로 하자.
+    // ) close를 하면 flush를 선언 안해도 되는데, 우리는 이걸 습관화 하기 위해 사용하자
     out.flush();
-    
+
     out.close();
 
     System.out.println("출력 완료!");

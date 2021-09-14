@@ -23,6 +23,7 @@ public class Test03_1 {
     BufferedOutputStream out1 = new BufferedOutputStream(out0);
     DataOutputStream out = new DataOutputStream(out1);
 
+    // 입력한 갯수를 선언해야 출력할 때 이 갯수만큼 출력한다.
     out.writeInt(students.size());
 
     for (Score s : students) {
