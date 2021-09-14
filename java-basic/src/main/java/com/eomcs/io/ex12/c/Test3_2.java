@@ -10,7 +10,7 @@ public class Test3_2 {
     FileInputStream in0 = new FileInputStream("temp/score.data");
     ObjectInputStream in = new ObjectInputStream(in0);
 
-    Score3 score = (Score3) in.readObject();
+    Score3 score = (Score3) in.readObject(); //형변환
     System.out.println(score);
 
     // transient 필드는 보안상 serialize 되지 않기 때문에 
