@@ -7,20 +7,12 @@ import com.eomcs.util.Prompt;
 
 public class BoardDetailHandler extends AbstractBoardHandler {
 
-  BoardUpdateHandler boardUpdateHandler;
-  BoardDeleteHandler boardDeleteHandler;
-
-  public BoardDetailHandler(
-      List<Board> boardList, 
-      BoardUpdateHandler boardUpdateHandler,
-      BoardDeleteHandler boardDeleteHandler) {
+  public BoardDetailHandler(List<Board> boardList) {
     super(boardList);
-    this.boardUpdateHandler = boardUpdateHandler;
-    this.boardDeleteHandler = boardDeleteHandler;
   }
 
   @Override
-  public void execute(CommandRequest request) {
+  public void execute(CommandRequest request) throws Exception {
     System.out.println("[게시글 상세보기]");
     int no = Prompt.inputInt("번호? ");
 
@@ -41,7 +33,8 @@ public class BoardDetailHandler extends AbstractBoardHandler {
     System.out.println();
 
     Member loginUser = AuthLoginHandler.getLoginUser(); 
-    if (loginUser == null || board.getWriter().getNo() != loginUser.getNo()) {
+    if (loginUser == null || 
+        (board.getWriter().getNo() != loginUser.getNo() && !loginUser.getEmail().equals("root@test.com"))) {
       return;
     }
 
@@ -54,11 +47,11 @@ public class BoardDetailHandler extends AbstractBoardHandler {
       switch (input) {
         case "U":
         case "u":
-          boardUpdateHandler.execute(request);
+          request.getRequestDispatcher("/board/update").forward(request);
           return;
         case "D":
         case "d":
-          boardDeleteHandler.execute(request);
+          request.getRequestDispatcher("/board/delete").forward(request);
           return;
         case "0":
           return;
