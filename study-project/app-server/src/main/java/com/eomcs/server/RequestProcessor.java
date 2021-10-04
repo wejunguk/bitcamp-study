@@ -16,19 +16,20 @@ import com.google.gson.Gson;
 // - 클라이언트 요청 정보를 객체에 보관하고, 응답 기능을 수행할 객체를 만드는 일을 한다.
 // 
 public class RequestProcessor extends Thread {
-  Socket socket; 
-
+  Socket socket;
   Map<String,DataProcessor> dataProcessorMap;
 
   public RequestProcessor(Socket socket, Map<String,DataProcessor> dataProcessorMap) throws Exception {
     this.socket = socket;
     this.dataProcessorMap = dataProcessorMap; 
   }
+
   @Override
   public void run() {
     try (Socket socket = this.socket;
         PrintWriter out = new PrintWriter(socket.getOutputStream());
         BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));) {
+
       Set<String> dataProcessorNames = dataProcessorMap.keySet();
 
       String command = in.readLine();
@@ -70,11 +71,9 @@ public class RequestProcessor extends Thread {
   }
 
   private void saveData() throws Exception {
-    // => 데이터를 파일에 저장한다.
     Collection<DataProcessor> dataProcessors = dataProcessorMap.values();
     for (DataProcessor dataProcessor : dataProcessors) {
       if (dataProcessor instanceof JsonDataTable) {
-        // 만약 데이터 처리 담당자가 JsonDataTable 의 자손이라면,
         ((JsonDataTable<?>)dataProcessor).save();
       }
     }

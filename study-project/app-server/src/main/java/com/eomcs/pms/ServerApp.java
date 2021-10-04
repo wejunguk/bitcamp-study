@@ -34,12 +34,9 @@ public class ServerApp {
 
       // 2) 새로 생성한 실행 흐름을 시작시킨다.
       // => run()이 호출될 것이다.
-      // => 시작시킨 후 즉시 리턴한다./
+      // => 시작시킨 후 즉시 리턴한다. 
       //    즉 새로 생성한 실행 흐름이 종료될 때까지 기다리지 않는다.
       requestProcessor.start();
-
-
-
     }
 
     //    System.out.println("서버 종료");
