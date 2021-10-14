@@ -1,9 +1,9 @@
 // 게시판 관리 - JDBC 코드를 별도의 클래스로 캡슐화시킴. DAO 적용.
-package com.eomcs.jdbc.ex4;
+package com.eomcs.jdbc.ex3;
 
 import java.util.Scanner;
 
-public class Exam0150 {
+public class Exam0450 {
 
   public static void main(String[] args) throws Exception {
     int no = 0;
@@ -14,8 +14,7 @@ public class Exam0150 {
     }
 
     try {
-      DataSource dataSource = new DefaultDataSource();
-      BoardDao boardDao = new BoardDao(dataSource);
+      BoardDao boardDao = new BoardDao();
       int count = boardDao.delete(no);
 
       if (count == 0) {

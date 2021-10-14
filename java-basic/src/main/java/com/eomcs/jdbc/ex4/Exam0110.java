@@ -1,5 +1,5 @@
 // 자식 테이블의 데이터를 함께 입력할 때 문제점
-package com.eomcs.jdbc.ex2;
+package com.eomcs.jdbc.ex4;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,7 +7,7 @@ import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Exam0410 {
+public class Exam0110 {
 
   public static void main(String[] args) throws Exception {
     String title = null;

@@ -1,5 +1,5 @@
 // 게시판 관리 - 삭제 + PreparedStatement 적용
-package com.eomcs.jdbc.ex2;
+package com.eomcs.jdbc.ex3;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -16,9 +16,9 @@ public class Exam0350 {
       no = keyScan.nextLine();
     }
 
-    try (Connection con = DriverManager.getConnection( //
+    try (Connection con = DriverManager.getConnection( 
         "jdbc:mysql://localhost:3306/studydb?user=study&password=1111");
-        PreparedStatement stmt = con.prepareStatement( //
+        PreparedStatement stmt = con.prepareStatement(
             "delete from x_board where board_id=?")) {
 
       stmt.setString(1, no);

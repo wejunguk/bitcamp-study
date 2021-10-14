@@ -1,5 +1,5 @@
 // insert 한 후 auto increment PK 값 리턴 받기
-package com.eomcs.jdbc.ex2;
+package com.eomcs.jdbc.ex4;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Scanner;
 
-public class Exam0411 {
+public class Exam0111 {
 
   public static void main(String[] args) throws Exception {
     String title = null;
@@ -33,7 +33,8 @@ public class Exam0411 {
         //
         PreparedStatement stmt = con.prepareStatement( 
             "insert into x_board(title,contents) values(?,?)", 
-            Statement.RETURN_GENERATED_KEYS);) {
+            //서버에 데이터 입력한 후 자동증가된 번호를 받겠다 선언.
+            Statement.RETURN_GENERATED_KEYS);) { 
 
       stmt.setString(1, title);
       stmt.setString(2, contents);
@@ -41,14 +42,17 @@ public class Exam0411 {
       System.out.printf("%d 개 입력 성공!\n", count);
 
       // insert 수행 후 자동 생성된 PK 값은 따로 요구해야 한다.
+      // 자동증가된 번호만 모아둔 가상의 컬럼이 있는데 이것의 이름은 미정.
+      // 이것을 가지고 오는 것.
       try (ResultSet rs = stmt.getGeneratedKeys()) {
         // insert를 한 개만 했기 때문에 PK도 한 개만 생성되었다.
         // 따라서 ResultSet에 대해 여러 번 반복을 할 필요가 없다.
         rs.next();
 
-        // 자동 생성된 PK 값을 꺼낼 때는 따로 컬럼 이름이 없기 때문에 컬럼 인덱스로 꺼낸다.
-        int no = rs.getInt(1);
-        System.out.printf("입력된 게시글 번호: %d\n", no);
+        // 자동 생성된 PK 값을 꺼낼 때는 따로 컬럼 이름이나 PK컬럼의 인덱스로 꺼낸다.
+        int no = rs.getInt("board_id");
+        int no2 = rs.getInt(1);
+        System.out.printf("입력된 게시글 번호: %d, %d\n", no, no2);
       }
     }
   }
