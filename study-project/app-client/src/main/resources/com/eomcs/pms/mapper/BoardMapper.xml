@@ -58,12 +58,6 @@
       inner join pms_member m on b.member_no=m.member_no
     where board_no=#{no}
   </select>
-  
-  <update id="updateCount" parameterType="int">
-    update pms_board set
-      view_cnt = view_cnt + 1
-    where board_no=#{no}
-  </update>
 
   <select id="findByKeyword" resultMap="BoardMap" parameterType="string">
     <include refid="select1"/>
