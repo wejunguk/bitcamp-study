@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.Collection;
 import javax.servlet.GenericServlet;
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
@@ -21,8 +20,8 @@ public class MemberListController extends GenericServlet {
   MemberDao memberDao;
 
   @Override
-  public void init(ServletConfig config) throws ServletException {
-    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+  public void init() {
+    ServletContext 웹애플리케이션공용저장소 = getServletContext();
     memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
   }
 
@@ -37,7 +36,10 @@ public class MemberListController extends GenericServlet {
       request.setAttribute("memberList", memberList);
 
       // 출력을 담당할 뷰를 호출한다.
-      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/member/MemberList.jsp");
+      request.setAttribute("pageTitle", "회원목록");
+      request.setAttribute("contentUrl", "/member/MemberList.jsp");
+
+      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/template1.jsp");
       요청배달자.forward(request, response);
 
     } catch (Exception e) {

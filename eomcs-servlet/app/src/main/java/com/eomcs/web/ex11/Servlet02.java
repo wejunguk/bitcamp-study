@@ -24,8 +24,8 @@ public class Servlet02 extends HttpServlet {
 
     // 세션 아이디 보내기
     // => 서버로부터 쿠키를 통해 받은 세션 아이디는
-    // 웹 브라우저가 해당 서버에 요청할 때마다
-    // 쿠키로 세션 아이디를 보낸다.
+    //    웹 브라우저가 해당 서버에 요청할 때마다
+    //    쿠키로 세션 아이디를 보낸다.
     // => HTTP 요청 프로토콜
     //
     // GET /eomcs-java-web/ex11/s2 HTTP/1.1
@@ -35,12 +35,12 @@ public class Servlet02 extends HttpServlet {
     // Cookie: JSESSIONID=AAEEF5A0E55596AB47FF69573B179CB5 <--- 세션아이디
 
     HttpSession session = request.getSession();
-    // 1) 세션 아이디가 있다면,
-    //    => 세션 아이디가 유효하다면,
-    //       => 기존에 생성한 HttpSession 객체를 리턴한다.
-    //    => 세션 아이디가 유효하지 않다면,
+    // 1) 클라이언트가 세션 아이드를 보냈다면,
+    //    => 그 아이디에 해당하는 세션 객체가 유효하다면,
+    //       => 기존의 HttpSession 객체를 리턴한다.
+    //    => 그 아이디에 해당하는 세션 책체가 유효하지않다면,(서버에서 정한 시간 동안 요청이 없었다면) 
     //       => 2) 번으로 간다. 
-    // 2) 세션 아이디가 없다면,
+    // 2) 클라이언트가 세션 아이디를 보내지않았다면,
     //    => 새 HttpSession 객체를 생성하여 리턴한다.
     //    => 응답 프로토콜에 새로 생성한 HttpSession 객체의 세션ID를 
     //       쿠키로 보낸다.

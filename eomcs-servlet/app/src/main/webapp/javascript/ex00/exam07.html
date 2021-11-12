@@ -30,8 +30,6 @@ tag1.onclick = function() {
   
   // JSON 형식의 문자열 데이터 ==> JavaScript 객체
   console.log(xhr.responseText);
-  // JSON형식의 데이터를 javaScript로 가지고와서 자바객체로 바꿔서
-  // 반복문으로 바꿔서 하나하나씩 꺼낸다.
   var arr = JSON.parse(xhr.responseText);
   
   var trList = "";
