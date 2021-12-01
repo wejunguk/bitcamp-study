@@ -5,7 +5,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
-@ComponentScan("bitcamp.app1")
+@ComponentScan(basePackages = "bitcamp.web.app1")
 public class App1Config {
 
   @Bean
@@ -20,6 +20,5 @@ public class App1Config {
     mr.setMaxUploadSizePerFile(5000000);
     return mr;
   }
+
 }
-
-
