@@ -7,6 +7,7 @@ public class Test {
   static void m1(int c) {
     int d = c + 100;
   }
+
   void m2(int c) {
     int d = c + 100;
   }

@@ -2,23 +2,25 @@ package com.eomcs.oop.ex00.p2;
 
 public class CalculatorTest {
   public static void main(String[] args) {
+    // 계산할 때 사용하는 변수를
+    // 계산 클래스로 이동하자!
+
+
     // 2 + 3 + 4 - 7 * 3 = 6
     // 3 * 2 - 1 = 5
 
-    Calculator c1 = new Calculator();
-    Calculator c2 = new Calculator();
+    Calculator.plus(2);
+    Calculator.plus(3);
+    Calculator.plus(4);
+    Calculator.minus(7);
+    Calculator.multiple(3);
+    System.out.println(Calculator.result);
 
-    Calculator.plus(c1, 2);
-    Calculator.plus(c1, 3);
-    Calculator.plus(c1, 4);
-    Calculator.minus(c1, 7);
-    Calculator.multiple(c1, 3);
-    System.out.println(c1.result);
-
-    Calculator.plus(c2, 3);
-    Calculator.multiple(c2, 2);
-    Calculator.minus(c2, 1);
-    System.out.println(c2.result);
+    Calculator.result = 0;
+    Calculator.plus(3);
+    Calculator.multiple(2);
+    Calculator.minus(1);
+    System.out.println(Calculator.result);
 
   }
 

@@ -7,7 +7,7 @@ public class App2 {
 
   public static void main(String[] args) {
 
-    System.out.println("]");
+    System.out.println("[프로젝트]");
 
     Scanner keyboardScan = new Scanner(System.in);
 

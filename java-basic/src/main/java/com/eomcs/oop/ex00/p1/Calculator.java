@@ -1,18 +1,15 @@
 package com.eomcs.oop.ex00.p1;
 
 public class Calculator {
-
-  static int result;
-
-  static void plus(int value) {
-    result += value;
+  static int plus(int result, int value) {
+    return result + value;
   }
 
-  static void minus(int value) {
-    result -= value;
+  static int minus(int result, int value) {
+    return result - value;
   }
 
-  static void multiple(int value) {
-    result *= value;
+  static int multiple(int result, int value) {
+    return result * value;
   }
 }
