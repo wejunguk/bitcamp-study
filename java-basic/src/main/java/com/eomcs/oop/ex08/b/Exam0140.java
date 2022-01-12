@@ -19,10 +19,10 @@ class Customer4 {
   private int age;
   private int weight;
   private int height;
-
   public String getName() {
     return name;
   }
+
   public void setName(String name) {
     this.name = name;
   }

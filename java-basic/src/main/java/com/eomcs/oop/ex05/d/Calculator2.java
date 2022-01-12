@@ -5,7 +5,8 @@ package com.eomcs.oop.ex05.d;
 public class Calculator2 extends Calculator {
 
   // 새 기능을 추가한다.
-  //
+  // 상속은 기존 코드를 가지고 오는 것이 아니라
+  // 기존 코드를 사용하는 것이다!
   public void multiple(int value) {
     this.result *= value;
   }
