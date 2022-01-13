@@ -1,20 +1,26 @@
 package com.eomcs.pms;
 
-import com.eomcs.pms.hadler.BoardHandler;
-import com.eomcs.pms.hadler.MemberHandler;
-import com.eomcs.pms.hadler.ProjectHandler;
-import com.eomcs.pms.hadler.TaskHandler;
+import com.eomcs.pms.handler.BoardHandler;
+import com.eomcs.pms.handler.MemberHandler;
+import com.eomcs.pms.handler.ProjectHandler;
+import com.eomcs.pms.handler.TaskHandler;
 import com.eomcs.pms.menu.Menu;
 import com.eomcs.pms.menu.MenuGroup;
 import com.eomcs.util.Prompt;
 
-
 public class App {
 
+
+  // 생성자로 받을 필요가 없다 
+  // 왜? BoardHandler에 만들었기 때문이다.
   BoardHandler boardHandler = new BoardHandler();
   MemberHandler memberHandler = new MemberHandler();
-  ProjectHandler projectHandler = new ProjectHandler(memberHandler);
-  TaskHandler taskHandler = new TaskHandler(memberHandler);
+  ProjectHandler projectHandler = new ProjectHandler(memberHandler.getMemberList());
+  TaskHandler taskHandler = new TaskHandler(memberHandler.getMemberList());
+
+  public App() {
+
+  }
 
   public static void main(String[] args) {
     App app = new App();
@@ -22,8 +28,6 @@ public class App {
   }
 
   void service() {
-    //    Menu mainMenu = createMenu();
-    //    mainMenu.execute();
     createMenu().execute();
     Prompt.close();
   }
@@ -131,3 +135,15 @@ public class App {
     return mainMenuGroup;
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
