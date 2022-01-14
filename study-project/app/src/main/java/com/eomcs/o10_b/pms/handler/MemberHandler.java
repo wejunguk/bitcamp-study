@@ -1,15 +1,22 @@
-package com.eomcs.pms.handler;
+package com.eomcs.o10_b.pms.handler;
 
 import java.sql.Date;
-import com.eomcs.pms.domain.Member;
-import com.eomcs.util.Prompt;
+import com.eomcs.o10_b.pms.domain.Member;
+import com.eomcs.o10_b.util.Prompt;
 
 public class MemberHandler {
 
-  List memberList;
+  // 이걸 공개하게되면
+  // 다른 패키지 안에서 memberHandler = new MemberList();를
+  // 추가할수 있어서
+  // = 멤버핸들러에 "새로운 멤버리스트"를 만들 수 있어서
+  // 외부접근을 막아야한다.
+  MemberList2 memberList = new MemberList2();
 
-  public MemberHandler(List memberList) {
-    this.memberList = memberList;
+  // 그래서 이걸 만든다.
+  // memberList의 주소값을 넘겨줄수 있도록 메서드를 만들자
+  public MemberList2 getMemberList() {
+    return memberList;
   }
 
   public void add() {
@@ -52,7 +59,7 @@ public class MemberHandler {
     System.out.println("[회원 상세보기]");
     int no = Prompt.inputInt("번호? ");
 
-    Member member = findByNo(no);
+    Member member = memberList.findByNo(no);
 
     if (member == null) {
       System.out.println("해당 번호의 회원이 없습니다.");
@@ -70,7 +77,7 @@ public class MemberHandler {
     System.out.println("[회원 변경]");
     int no = Prompt.inputInt("번호? ");
 
-    Member member = findByNo(no);
+    Member member = memberList.findByNo(no);
 
     if (member == null) {
       System.out.println("해당 번호의 회원이 없습니다.");
@@ -102,7 +109,7 @@ public class MemberHandler {
     System.out.println("[회원 삭제]");
     int no = Prompt.inputInt("번호? ");
 
-    Member member = findByNo(no);
+    Member member = memberList.findByNo(no);
 
     if (member == null) {
       System.out.println("해당 번호의 회원이 없습니다.");
@@ -120,29 +127,9 @@ public class MemberHandler {
     System.out.println("회원을 삭제하였습니다.");
   }
 
-  private Member findByNo(int no) {
-    Object[] arr = memberList.toArray();
 
-    for (Object obj : arr) {
-      Member member = (Member) obj;
-      if (member.no == no) {
-        return member;
-      }
-    }
-    return null;
-  }
 
-  public boolean exist(String name) {
-    Object[] arr = memberList.toArray();
 
-    for (Object obj : arr) {
-      Member member = (Member) obj;
-      if (member.name.equals(name)) {
-        return true;
-      }
-    }
-    return false;
-  }
 
 
 }

@@ -1,16 +1,16 @@
-package com.eomcs.pms.handler;
+package com.eomcs.o10_d.pms.handler;
 
 import java.sql.Date;
-import com.eomcs.pms.domain.Project;
-import com.eomcs.util.Prompt;
+import com.eomcs.o10_d.pms.domain.Project;
+import com.eomcs.o10_d.util.Prompt;
 
 public class ProjectHandler {
 
-  List projectList;
+  // ProjectHandler에서 사용할 projectList를 여기다 만드는 것이다.
+  LinkedList projectList = new LinkedList();
   MemberHandler memberHandler;
 
-  public ProjectHandler(List projectList, MemberHandler memberHandler) {
-    this.projectList = projectList;
+  public ProjectHandler(MemberHandler memberHandler) {
     this.memberHandler = memberHandler;
   }
 

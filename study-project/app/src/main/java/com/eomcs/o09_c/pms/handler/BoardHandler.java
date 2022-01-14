@@ -1,21 +1,13 @@
-package com.eomcs.pms.handler;
+package com.eomcs.o09_c.pms.handler;
 
 import java.sql.Date;
-import com.eomcs.pms.domain.Board;
-import com.eomcs.util.Prompt;
+import com.eomcs.o09_c.pms.domain.Board;
+import com.eomcs.o09_c.util.Prompt;
 
 public class BoardHandler {
 
-
-  // 주입받자 생성자를 통해! 의존객체 교체가 더 쉬어진다.
-  // 실무는 타입을 추상이나 인터페이스로 사용한다.
-  List boardList;
-
-  // BoardHandler 만들때 List 객체 반드시 필요해. 넘겨줘
-  // 안주면 BoardHandler 못 만들어!
-  public BoardHandler(List boardList) {
-    this.boardList = boardList;
-  }
+  //BoardList를 사용하기 위해 BoardList 인스턴스 주소를 저장한다.
+  BoardList boardList = new BoardList();
 
   public void add() {
     System.out.println("[새 게시글]");
@@ -35,11 +27,9 @@ public class BoardHandler {
 
   public void list() {
     System.out.println("[게시글 목록]");
-    Object[] list = boardList.toArray();
+    Board[] list = boardList.toArray();
 
-    for (Object obj : list) {   // list에 들어있는건 Object의 주소
-      // obj 배열에 들어있는 주소는 Board객체 주소 이기 때문에 형변환을 해서 사용해야한다.
-      Board board = (Board) obj;
+    for (Board board : list) {
       System.out.printf("%d, %s, %s, %s, %d, %d\n", 
           board.no, 
           board.title, 
@@ -54,7 +44,7 @@ public class BoardHandler {
     System.out.println("[게시글 상세보기]");
     int no = Prompt.inputInt("번호? ");
 
-    Board board = findByNo(no);
+    Board board = boardList.findByNo(no);
 
     if (board == null) {
       System.out.println("해당 번호의 게시글이 없습니다.");
@@ -72,7 +62,7 @@ public class BoardHandler {
     System.out.println("[게시글 변경]");
     int no = Prompt.inputInt("번호? ");
 
-    Board board = findByNo(no);
+    Board board = boardList.findByNo(no);
 
     if (board == null) {
       System.out.println("해당 번호의 게시글이 없습니다.");
@@ -97,10 +87,7 @@ public class BoardHandler {
     System.out.println("[게시글 삭제]");
     int no = Prompt.inputInt("번호? ");
 
-    // 같은 클래스 안에 findByNo이 있기때문에
-    // 바로 불러올 수 있다.
-    Board board = findByNo(no);
-
+    Board board = boardList.findByNo(no);
 
     if (board == null) {
       System.out.println("해당 번호의 게시글이 없습니다.");
@@ -119,19 +106,19 @@ public class BoardHandler {
     System.out.println("게시글을 삭제하였습니다.");
   }
 
-  private Board findByNo(int no) {
+  // BoardList에 옮기지 않으면 이렇게 사용해야 한다.
+  //  private Board findByNo(int no) {
+  //    Board[] list = boardList.toArray();
+  //    for (Board board : list) {
+  //      if (board.no == no) {
+  //        return board;
+  //      }
+  //    }
+  //    return null;
+  //  }
 
-    // boardHandler를 상속받지 않았기 때문에
-    // 정확한 인스턴스명을 지정해주고 toArray를 호출해야한다.
-    Object[] arr = boardList.toArray();
-    for (Object obj : arr) {
-      Board board = (Board) obj;
-      if (board.no == no) {
-        return board;
-      }
-    }
-    return null;
-  }
+
+
 
 }
 

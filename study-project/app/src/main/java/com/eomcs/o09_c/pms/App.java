@@ -1,28 +1,22 @@
-package com.eomcs.pms;
+package com.eomcs.o09_c.pms;
 
-import com.eomcs.pms.handler.ArrayList;
-import com.eomcs.pms.handler.BoardHandler;
-import com.eomcs.pms.handler.LinkedList;
-import com.eomcs.pms.handler.List;
-import com.eomcs.pms.handler.MemberHandler;
-import com.eomcs.pms.handler.ProjectHandler;
-import com.eomcs.pms.handler.TaskHandler;
-import com.eomcs.pms.menu.Menu;
-import com.eomcs.pms.menu.MenuGroup;
-import com.eomcs.util.Prompt;
+import com.eomcs.o09_c.pms.handler.BoardHandler;
+import com.eomcs.o09_c.pms.handler.MemberHandler;
+import com.eomcs.o09_c.pms.handler.ProjectHandler;
+import com.eomcs.o09_c.pms.handler.TaskHandler;
+import com.eomcs.o09_c.pms.menu.Menu;
+import com.eomcs.o09_c.pms.menu.MenuGroup;
+import com.eomcs.o09_c.util.Prompt;
 
 public class App {
 
-  List boardList = new ArrayList();
-  List memberList = new LinkedList();
-  List projectList = new LinkedList();
-  List taskList = new ArrayList();
 
-  // BoardHandler 왜 그냥 인스턴스 만들래? BoardHandler는 반드시 기본 생성자가 있어야해
-  BoardHandler boardHandler = new BoardHandler(boardList);
-  MemberHandler memberHandler = new MemberHandler(memberList);
-  ProjectHandler projectHandler = new ProjectHandler(projectList, memberHandler);
-  TaskHandler taskHandler = new TaskHandler(taskList, memberHandler);
+  // 생성자로 받을 필요가 없다 
+  // 왜? BoardHandler에 만들었기 때문이다.
+  BoardHandler boardHandler = new BoardHandler();
+  MemberHandler memberHandler = new MemberHandler();
+  ProjectHandler projectHandler = new ProjectHandler(memberHandler.getMemberList());
+  TaskHandler taskHandler = new TaskHandler(memberHandler.getMemberList());
 
   public App() {
 

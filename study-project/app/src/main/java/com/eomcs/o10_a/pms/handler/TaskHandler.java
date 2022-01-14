@@ -1,18 +1,21 @@
-package com.eomcs.pms.handler;
+package com.eomcs.o10_a.pms.handler;
 
 import java.sql.Date;
-import com.eomcs.pms.domain.Task;
-import com.eomcs.util.Prompt;
+import com.eomcs.o10_a.pms.domain.Task;
+import com.eomcs.o10_a.util.Prompt;
 
 public class TaskHandler {
 
 
-  List taskList;
-  MemberHandler memberHandler;
+  // TaskList는 자기 자신이 사용하는 것이기 때문에
+  // new를 선언해 자기가 만들어 사용하고
+  TaskList taskList = new TaskList();
+  //MemberList는 자신이 사용하는 것이 아니기 때문에
+  // 생성자로 받아서 사용한다.
+  MemberList memberList;
 
-  public TaskHandler(List taskList, MemberHandler memberHandler) {
-    this.taskList = taskList;
-    this.memberHandler = memberHandler;
+  public TaskHandler(MemberList memberList) {
+    this.memberList = memberList;
   }
 
   public void add() {
@@ -53,7 +56,7 @@ public class TaskHandler {
     System.out.println("[작업 상세보기]");
     int no = Prompt.inputInt("번호? ");
 
-    Task task = findByNo(no);
+    Task task = taskList.findByNo(no);
     if (task == null) {
       System.out.println("해당 번호의 작업이 없습니다.");
       return;
@@ -71,7 +74,7 @@ public class TaskHandler {
     System.out.println("[작업 변경]");
     int no = Prompt.inputInt("번호? ");
 
-    Task task = findByNo(no);
+    Task task = taskList.findByNo(no);
     if (task == null) {
       System.out.println("해당 번호의 작업이 없습니다.");
       return;
@@ -105,7 +108,7 @@ public class TaskHandler {
     System.out.println("[작업 삭제]");
     int no = Prompt.inputInt("번호? ");
 
-    Task task = findByNo(no);
+    Task task = taskList.findByNo(no);
     if (task == null) {
       System.out.println("해당 번호의 작업이 없습니다.");
       return;
@@ -133,7 +136,7 @@ public class TaskHandler {
     while (true) {
       String owner = Prompt.inputString(label);
       // MemberHandler의 인스턴스는 미리 인스턴스 변수에 주입 받은 것을 사용한다.
-      if (this.memberHandler.exist(owner)) {
+      if (this.memberList.exist(owner)) {
         return owner;
       } else if (owner.length() == 0) {
         return null;
@@ -156,19 +159,6 @@ public class TaskHandler {
     System.out.println("1: 진행중");
     System.out.println("2: 완료");
     return Prompt.inputInt("> ");
-  }
-
-  public Task findByNo(int no) {
-
-    Object[] arr = taskList.toArray();
-
-    for (Object obj : arr) {
-      Task task = (Task) obj;
-      if (task.no == no) {
-        return task;
-      }
-    }
-    return null;
   }
 
 }

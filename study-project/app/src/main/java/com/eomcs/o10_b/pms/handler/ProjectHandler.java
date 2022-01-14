@@ -1,17 +1,17 @@
-package com.eomcs.pms.handler;
+package com.eomcs.o10_b.pms.handler;
 
 import java.sql.Date;
-import com.eomcs.pms.domain.Project;
-import com.eomcs.util.Prompt;
+import com.eomcs.o10_b.pms.domain.Project;
+import com.eomcs.o10_b.util.Prompt;
 
 public class ProjectHandler {
 
-  List projectList;
-  MemberHandler memberHandler;
+  // ProjectHandler에서 사용할 projectList를 여기다 만드는 것이다.
+  ProjectList2 projectList = new ProjectList2();
+  MemberList2 memberList;
 
-  public ProjectHandler(List projectList, MemberHandler memberHandler) {
-    this.projectList = projectList;
-    this.memberHandler = memberHandler;
+  public ProjectHandler(MemberList2 memberList) {
+    this.memberList = memberList;
   }
 
   public void add() {
@@ -55,7 +55,7 @@ public class ProjectHandler {
     System.out.println("[프로젝트 상세보기]");
     int no = Prompt.inputInt("번호? ");
 
-    Project project = findByNo(no);
+    Project project = projectList.findByNo(no);
 
     if (project == null) {
       System.out.println("해당 번호의 프로젝트가 없습니다.");
@@ -74,7 +74,7 @@ public class ProjectHandler {
     System.out.println("[프로젝트 변경]");
     int no = Prompt.inputInt("번호? ");
 
-    Project project = findByNo(no);
+    Project project = projectList.findByNo(no);
 
     if (project == null) {
       System.out.println("해당 번호의 프로젝트가 없습니다.");
@@ -116,7 +116,7 @@ public class ProjectHandler {
     System.out.println("[프로젝트 삭제]");
     int no = Prompt.inputInt("번호? ");
 
-    Project project = findByNo(no);
+    Project project = projectList.findByNo(no);
 
     if (project == null) {
       System.out.println("해당 번호의 프로젝트가 없습니다.");
@@ -139,7 +139,7 @@ public class ProjectHandler {
       // 회원 이름이 등록된 회원의 이름인지 검사할 때 사용할 MemberHandler 인스턴스는
       // 인스턴스 변수에 미리 주입되어 있기 때문에 파라미터로 받을 필요가 없다.
       // 다음과 같이 인스턴스 변수를 직접 사용하면 된다.
-      if (this.memberHandler.exist(owner)) {
+      if (this.memberList.exist(owner)) {
         return owner;
       } else if (owner.length() == 0) {
         return null;
@@ -152,7 +152,7 @@ public class ProjectHandler {
     String members = "";
     while (true) {
       String member = Prompt.inputString(label);
-      if (this.memberHandler.exist(member)) {
+      if (this.memberList.exist(member)) {
         if (members.length() > 0) {
           members += ",";
         }
@@ -164,18 +164,6 @@ public class ProjectHandler {
       System.out.println("등록된 회원이 아닙니다.");
     }
     return members;
-  }
-
-  private Project findByNo(int no) {
-    Object[] arr = projectList.toArray();
-
-    for (Object obj : arr) {
-      Project project = (Project) obj;
-      if (project.no == no) {
-        return project;
-      }
-    }
-    return null;
   }
 
 }

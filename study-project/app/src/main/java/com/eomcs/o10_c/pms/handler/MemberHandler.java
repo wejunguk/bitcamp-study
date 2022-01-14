@@ -1,16 +1,12 @@
-package com.eomcs.pms.handler;
+package com.eomcs.o10_c.pms.handler;
 
 import java.sql.Date;
-import com.eomcs.pms.domain.Member;
-import com.eomcs.util.Prompt;
+import com.eomcs.o10_c.pms.domain.Member;
+import com.eomcs.o10_c.util.Prompt;
 
 public class MemberHandler {
 
-  List memberList;
-
-  public MemberHandler(List memberList) {
-    this.memberList = memberList;
-  }
+  ArrayList memberList = new ArrayList();
 
   public void add() {
     System.out.println("[회원 등록]");

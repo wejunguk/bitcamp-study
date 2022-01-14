@@ -1,21 +1,12 @@
-package com.eomcs.pms.handler;
+package com.eomcs.o10_c.pms.handler;
 
 import java.sql.Date;
-import com.eomcs.pms.domain.Board;
-import com.eomcs.util.Prompt;
+import com.eomcs.o10_c.pms.domain.Board;
+import com.eomcs.o10_c.util.Prompt;
 
 public class BoardHandler {
 
-
-  // 주입받자 생성자를 통해! 의존객체 교체가 더 쉬어진다.
-  // 실무는 타입을 추상이나 인터페이스로 사용한다.
-  List boardList;
-
-  // BoardHandler 만들때 List 객체 반드시 필요해. 넘겨줘
-  // 안주면 BoardHandler 못 만들어!
-  public BoardHandler(List boardList) {
-    this.boardList = boardList;
-  }
+  ArrayList boardList = new ArrayList();
 
   public void add() {
     System.out.println("[새 게시글]");
