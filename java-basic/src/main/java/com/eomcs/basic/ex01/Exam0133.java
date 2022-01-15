@@ -26,6 +26,7 @@ public class Exam0133 {
       return age == other.age && Objects.equals(name, other.name);
     }
 
+
     // Object로부터 상속 받은 equals() 메서드를 
     // Member 클래스의 역할에 맞게 재정의해보자! => "오버라이딩"
 

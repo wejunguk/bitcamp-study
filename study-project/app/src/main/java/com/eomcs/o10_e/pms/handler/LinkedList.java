@@ -1,6 +1,6 @@
-package com.eomcs.pms.handler;
+package com.eomcs.o10_e.pms.handler;
 
-public class LinkedList implements List {
+public class LinkedList extends List {
 
   static class Node {
     // Project에서만 쓰는데 아니라 

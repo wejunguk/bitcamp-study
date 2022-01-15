@@ -1,4 +1,4 @@
-package com.eomcs.pms.handler;
+package com.eomcs.o10_g.pms.handler;
 
 public class LinkedList implements List {
 

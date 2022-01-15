@@ -1,4 +1,4 @@
-package com.eomcs.pms.handler;
+package com.eomcs.o10_g.pms.handler;
 
 //List 클래스
 //- ArrayList와 LinkedList를 한 타입으로 묶는 일을 한다.

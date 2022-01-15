@@ -1,8 +1,8 @@
-package com.eomcs.pms.handler;
+package com.eomcs.o10_g.pms.handler;
 
 import java.sql.Date;
-import com.eomcs.pms.domain.Board;
-import com.eomcs.util.Prompt;
+import com.eomcs.o10_g.pms.domain.Board;
+import com.eomcs.o10_g.util.Prompt;
 
 public class BoardHandler {
 
@@ -22,11 +22,11 @@ public class BoardHandler {
 
     Board board = new Board();
 
-    board.setNo(Prompt.inputInt("번호? "));
-    board.setTitle(Prompt.inputString("제목? "));
-    board.setContent(Prompt.inputString("내용? "));
-    board.setWriter(Prompt.inputString("작성자? "));
-    board.setRegisteredDate(new Date(System.currentTimeMillis()));
+    board.no = Prompt.inputInt("번호? ");
+    board.title = Prompt.inputString("제목? ");
+    board.content = Prompt.inputString("내용? ");
+    board.writer = Prompt.inputString("작성자? ");
+    board.registeredDate = new Date(System.currentTimeMillis());
 
     // boardList에게 더해달라고해라. board객체를
     boardList.add(board);
@@ -41,12 +41,12 @@ public class BoardHandler {
       // obj 배열에 들어있는 주소는 Board객체 주소 이기 때문에 형변환을 해서 사용해야한다.
       Board board = (Board) obj;
       System.out.printf("%d, %s, %s, %s, %d, %d\n", 
-          board.getNo(), 
-          board.getTitle(), 
-          board.getWriter(),
-          board.getRegisteredDate(),
-          board.getViewCount(), 
-          board.getLike());
+          board.no, 
+          board.title, 
+          board.writer,
+          board.registeredDate,
+          board.viewCount, 
+          board.like);
     }
   }
 
@@ -61,13 +61,11 @@ public class BoardHandler {
       return;
     }
 
-    System.out.printf("제목: %s\n", board.getTitle());
-    System.out.printf("내용: %s\n", board.getContent());
-    System.out.printf("작성자: %s\n", board.getWriter());
-    System.out.printf("등록일: %s\n", board.getRegisteredDate());
-
-    board.setViewCount(board.getViewCount() + 1);
-    System.out.printf("조회수: %d\n", board.getViewCount());
+    System.out.printf("제목: %s\n", board.title);
+    System.out.printf("내용: %s\n", board.content);
+    System.out.printf("작성자: %s\n", board.writer);
+    System.out.printf("등록일: %s\n", board.registeredDate);
+    System.out.printf("조회수: %d\n", ++board.viewCount);
   }
 
   public void update() {
@@ -81,8 +79,8 @@ public class BoardHandler {
       return;
     }
 
-    String title = Prompt.inputString(String.format("제목(%s)? ", board.getTitle()));
-    String content = Prompt.inputString(String.format("내용(%s)? ", board.getContent()));
+    String title = Prompt.inputString(String.format("제목(%s)? ", board.title));
+    String content = Prompt.inputString(String.format("내용(%s)? ", board.content));
 
     String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
@@ -90,8 +88,8 @@ public class BoardHandler {
       return;
     }
 
-    board.setTitle(title);
-    board.setContent(content);
+    board.title = title;
+    board.content = content;
     System.out.println("게시글을 변경하였습니다.");
   }
 
@@ -128,7 +126,7 @@ public class BoardHandler {
     Object[] arr = boardList.toArray();
     for (Object obj : arr) {
       Board board = (Board) obj;
-      if (board.getNo() == no) {
+      if (board.no == no) {
         return board;
       }
     }

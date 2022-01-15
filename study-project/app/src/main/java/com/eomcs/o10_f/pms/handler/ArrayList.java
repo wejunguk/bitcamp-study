@@ -1,6 +1,6 @@
-package com.eomcs.pms.handler;
+package com.eomcs.o10_f.pms.handler;
 
-public class ArrayList implements List {
+public class ArrayList extends List {
   static final int MAX_LENGTH = 5;
 
   // BoardList, MemberList, TaskList, ProjectList 중 어떤걸 사용할지 몰라서
