@@ -1,4 +1,4 @@
-package com.eomcs.pms.handler;
+package com.eomcs.o10_h.pms.handler;
 
 //List 클래스
 //- ArrayList와 LinkedList를 한 타입으로 묶는 일을 한다.
@@ -18,10 +18,5 @@ public interface List {
   //인터페이스의 메서드는 기본적으로 public이고 abstract 이다.
   void add(Object item);
   Object[] toArray();
-  // 삭제 했냐 안했냐
   boolean remove(Object obj);
-  int size();
-  Object get(int index);
-  // 삭제한 객체 주소 리턴
-  Object remove(int index);
 }

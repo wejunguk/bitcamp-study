@@ -1,11 +1,12 @@
-package com.eomcs.pms.handler;
+package com.eomcs.o10_h.pms.handler;
 
-public class ArrayList extends AbstractList {
+public class ArrayList implements List {
   static final int MAX_LENGTH = 5;
 
   // BoardList, MemberList, TaskList, ProjectList 중 어떤걸 사용할지 몰라서
   // 부모로 선언한다.
   Object[] list = new Object[MAX_LENGTH];
+  int size = 0;
 
   public void add(Object obj) { // board 객체 주소를 넣는다면
     if (size == list.length) {
@@ -51,28 +52,4 @@ public class ArrayList extends AbstractList {
     return -1;
   }
 
-  @Override
-  public Object get(int index) {
-    if (index < 0 || index >= this.size) { // 유효하지 않은 인덱스인 경우
-      return null;
-    }
-    return this.list[index];
-  }
-
-  @Override
-  public Object remove(int index) {
-
-    if (index < 0 || index >= this.size) { // 인덱스가 무효하다면
-      return null;
-    }
-
-    Object deleted = this.list[index]; // 삭제할 항목 저장
-
-    for (int i = index + 1; i < this.size; i++) {
-      this.list[i - 1] = this.list[i];
-    }
-    this.list[--this.size] = null;
-
-    return deleted; // 삭제한 항목 리턴
-  }
 }
