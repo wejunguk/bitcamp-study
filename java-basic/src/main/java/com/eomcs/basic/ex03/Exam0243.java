@@ -59,6 +59,7 @@ public class Exam0243 {
     list.add(m3);
 
     // lambda 문법으로 Consumer 구현체 만들기
+    // 메서드 한개짜리 interface만 람다문법 적용 가능
     list.forEach(m -> System.out.printf("이름: %s, 나이: %d\n", m.name, m.age));
   }
 }

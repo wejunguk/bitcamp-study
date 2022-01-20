@@ -1,6 +1,7 @@
 package com.eomcs.pms.handler;
 
 import java.sql.Date;
+import java.util.List;
 import com.eomcs.pms.domain.Board;
 import com.eomcs.util.Prompt;
 
@@ -9,11 +10,11 @@ public class BoardHandler {
 
   // 주입받자 생성자를 통해! 의존객체 교체가 더 쉬어진다.
   // 실무는 타입을 추상이나 인터페이스로 사용한다.
-  List boardList;
+  List<Board> boardList;
 
   // BoardHandler 만들때 List 객체 반드시 필요해. 넘겨줘
   // 안주면 BoardHandler 못 만들어!
-  public BoardHandler(List boardList) {
+  public BoardHandler(List<Board> boardList) {
     this.boardList = boardList;
   }
 
@@ -35,11 +36,17 @@ public class BoardHandler {
 
   public void list() {
     System.out.println("[게시글 목록]");
-    Object[] list = boardList.toArray();
 
-    for (Object obj : list) {   // list에 들어있는건 Object의 주소
-      // obj 배열에 들어있는 주소는 Board객체 주소 이기 때문에 형변환을 해서 사용해야한다.
-      Board board = (Board) obj;
+    // 현재 BoardList에 보관된 값을 담을 수 있는 만큼 크기의 배열을 생성한다. 
+    Board[] boards = new Board[boardList.size()];
+
+    // 배열을 파라미터로 넘겨서 값을 받아 온다.
+    // => 넘겨 주는 배열의 크기가 충분하기 때문에 toArray()는 새 배열을 만들지 않을 것이다.
+    boardList.toArray(boards);
+
+    // 이렇게 제네릭이 적용된 List를 사용하면 
+    // List에서 값을 꺼낼 때 마다 형변환 할 필요가 없어 프로그래밍이 편리하다.
+    for (Board board : boards) {
       System.out.printf("%d, %s, %s, %s, %d, %d\n", 
           board.getNo(), 
           board.getTitle(), 
@@ -122,12 +129,10 @@ public class BoardHandler {
   }
 
   private Board findByNo(int no) {
-
-    // boardHandler를 상속받지 않았기 때문에
-    // 정확한 인스턴스명을 지정해주고 toArray를 호출해야한다.
-    Object[] arr = boardList.toArray();
-    for (Object obj : arr) {
-      Board board = (Board) obj;
+    // 일부러 BoardList에 들어 있는 배열 보다 작은 배열을 넘겨준다.
+    // => 그러면 toArray()는 새 배열을 만들어 값을 저장한 후 리턴할 것이다.
+    Board[] arr = boardList.toArray(new Board[0]);
+    for (Board board : arr) {
       if (board.getNo() == no) {
         return board;
       }

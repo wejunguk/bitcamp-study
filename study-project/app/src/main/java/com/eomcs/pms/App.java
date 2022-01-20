@@ -1,35 +1,35 @@
 package com.eomcs.pms;
 
-import com.eomcs.pms.handler.ArrayList;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import com.eomcs.menu.Menu;
+import com.eomcs.menu.MenuGroup;
+import com.eomcs.pms.domain.Board;
+import com.eomcs.pms.domain.Member;
+import com.eomcs.pms.domain.Project;
+import com.eomcs.pms.domain.Task;
+import com.eomcs.pms.handler.AuthHandler;
 import com.eomcs.pms.handler.BoardHandler;
-import com.eomcs.pms.handler.LinkedList;
-import com.eomcs.pms.handler.List;
 import com.eomcs.pms.handler.MemberHandler;
 import com.eomcs.pms.handler.ProjectHandler;
 import com.eomcs.pms.handler.TaskHandler;
-import com.eomcs.pms.menu.Menu;
-import com.eomcs.pms.menu.MenuGroup;
 import com.eomcs.util.Prompt;
 
 public class App {
+  List<Board> boardList = new ArrayList<>();
+  List<Member> memberList = new LinkedList<>();
+  List<Project> projectList = new ArrayList<>();
+  List<Task> taskList = new LinkedList<>();
 
-  List boardList = new ArrayList();
-  List memberList = new LinkedList();
-  List projectList = new LinkedList();
-  List taskList = new ArrayList();
-
-  // BoardHandler 왜 그냥 인스턴스 만들래? BoardHandler는 반드시 기본 생성자가 있어야해
   BoardHandler boardHandler = new BoardHandler(boardList);
   MemberHandler memberHandler = new MemberHandler(memberList);
   ProjectHandler projectHandler = new ProjectHandler(projectList, memberHandler);
   TaskHandler taskHandler = new TaskHandler(taskList, memberHandler);
-
-  public App() {
-
-  }
+  AuthHandler authHandler = new AuthHandler(memberList);
 
   public static void main(String[] args) {
-    App app = new App();
+    App app = new App(); 
     app.service();
   }
 
@@ -42,26 +42,52 @@ public class App {
     MenuGroup mainMenuGroup = new MenuGroup("메인");
     mainMenuGroup.setPrevMenuTitle("종료");
 
+    mainMenuGroup.add(new Menu("로그인", Menu.ENABLE_LOGOUT) {
+      @Override
+      public void execute() {
+        authHandler.login(); 
+      }
+    });
+
+    mainMenuGroup.add(new Menu("내정보", Menu.ENABLE_LOGIN) {
+      @Override
+      public void execute() {
+        authHandler.displayLoginUser(); 
+      }
+    });
+
+    mainMenuGroup.add(new Menu("로그아웃", Menu.ENABLE_LOGIN) {
+      @Override
+      public void execute() {
+        authHandler.logout(); 
+      }
+    });
+
     MenuGroup boardMenu = new MenuGroup("게시판");
     mainMenuGroup.add(boardMenu);
 
-    boardMenu.add(new Menu("등록") {
+    boardMenu.add(new Menu("등록", Menu.ENABLE_LOGIN) {
+      @Override
       public void execute() {
         boardHandler.add(); 
       }});
     boardMenu.add(new Menu("목록") {
+      @Override
       public void execute() {
         boardHandler.list(); 
       }});
     boardMenu.add(new Menu("상세보기") {
+      @Override
       public void execute() {
         boardHandler.detail(); 
       }});
-    boardMenu.add(new Menu("변경") {
+    boardMenu.add(new Menu("변경", Menu.ENABLE_LOGIN) {
+      @Override
       public void execute() {
         boardHandler.update(); 
       }});
-    boardMenu.add(new Menu("삭제") {
+    boardMenu.add(new Menu("삭제", Menu.ENABLE_LOGIN) {
+      @Override
       public void execute() {
         boardHandler.delete(); 
       }});
@@ -69,23 +95,28 @@ public class App {
     MenuGroup memberMenu = new MenuGroup("회원");
     mainMenuGroup.add(memberMenu);
 
-    memberMenu.add(new Menu("등록") {
+    memberMenu.add(new Menu("등록", Menu.ENABLE_LOGIN) {
+      @Override
       public void execute() {
         memberHandler.add(); 
       }});
     memberMenu.add(new Menu("목록") {
+      @Override
       public void execute() {
         memberHandler.list(); 
       }});
     memberMenu.add(new Menu("상세보기") {
+      @Override
       public void execute() {
         memberHandler.detail(); 
       }});
-    memberMenu.add(new Menu("변경") {
+    memberMenu.add(new Menu("변경", Menu.ENABLE_LOGIN) {
+      @Override
       public void execute() {
         memberHandler.update(); 
       }});
-    memberMenu.add(new Menu("삭제") {
+    memberMenu.add(new Menu("삭제", Menu.ENABLE_LOGIN) {
+      @Override
       public void execute() {
         memberHandler.delete(); 
       }});
@@ -93,23 +124,28 @@ public class App {
     MenuGroup projectMenu = new MenuGroup("프로젝트");
     mainMenuGroup.add(projectMenu);
 
-    projectMenu.add(new Menu("등록") {
+    projectMenu.add(new Menu("등록", Menu.ENABLE_LOGIN) {
+      @Override
       public void execute() {
         projectHandler.add(); 
       }});
     projectMenu.add(new Menu("목록") {
+      @Override
       public void execute() {
         projectHandler.list(); 
       }});
     projectMenu.add(new Menu("상세보기") {
+      @Override
       public void execute() {
         projectHandler.detail(); 
       }});
-    projectMenu.add(new Menu("변경") {
+    projectMenu.add(new Menu("변경", Menu.ENABLE_LOGIN) {
+      @Override
       public void execute() {
         projectHandler.update(); 
       }});
-    projectMenu.add(new Menu("삭제") {
+    projectMenu.add(new Menu("삭제", Menu.ENABLE_LOGIN) {
+      @Override
       public void execute() {
         projectHandler.delete(); 
       }});
@@ -117,26 +153,32 @@ public class App {
     MenuGroup taskMenu = new MenuGroup("작업");
     mainMenuGroup.add(taskMenu);
 
-    taskMenu.add(new Menu("등록") {
+    taskMenu.add(new Menu("등록", Menu.ENABLE_LOGIN) {
+      @Override
       public void execute() {
         taskHandler.add(); 
       }});
     taskMenu.add(new Menu("목록") {
+      @Override
       public void execute() {
         taskHandler.list(); 
       }});
     taskMenu.add(new Menu("상세보기") {
+      @Override
       public void execute() {
         taskHandler.detail(); 
       }});
-    taskMenu.add(new Menu("변경") {
+    taskMenu.add(new Menu("변경", Menu.ENABLE_LOGIN) {
+      @Override
       public void execute() {
         taskHandler.update(); 
       }});
-    taskMenu.add(new Menu("삭제") {
+    taskMenu.add(new Menu("삭제", Menu.ENABLE_LOGIN) {
+      @Override
       public void execute() {
         taskHandler.delete(); 
       }});
+
 
     return mainMenuGroup;
   }

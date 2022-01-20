@@ -59,6 +59,32 @@ public class Exam0240 {
     list.add(m2);
     list.add(m3);
 
+    //    list.forEach(new Consumer<Member>() {
+    //      @Override
+    //      public void accept(Member m) {
+    //        System.out.printf("%s(%d)\n", m.name, m.age);
+    //      }
+    //    });
+
+    // 위의 문장 Lambda문법으로 정리
+    //    list.forEach( m -> System.out.printf("%s(%d)\n", m.name, m.age));
+
+    //    Member[] arr = list.toArray(new Member[0]);
+    //
+    //    for (Member m : arr) {
+    //      System.out.printf("%s(%d)\n", m.name, m.age);
+    //    }
+
+    //    Iterator<Member> 목록에서값을꺼내주는자 = list.iterator();
+    //    while (목록에서값을꺼내주는자.hasNext()) {
+    //      Member m = 목록에서값을꺼내주는자.next();
+    //      System.out.printf("%s(%d)\n", m.name, m.age);
+    //    }
+
+    // forEach() 메서드에게 넘길 객체
+    // => Consumer 규칙에 따라 만들어야 한다.
+    // => List보관된 객체를 반복문을 통해 꺼낼 때 마다
+    //    Consumer 규칙에 따라 accept()를 호출할 것이다. 
     class MyConsumer implements Consumer<Member> {
       @Override
       public void accept(Member m) {
@@ -69,6 +95,10 @@ public class Exam0240 {
       }
     }
 
+    // 의미 :
+    // => 야 List! 너가 갖고 있는 목록에서 값을 한 개 꺼낼 때 마다
+    //     지금 내가 파라미터로 넘겨주는 객체 있지?
+    //    MyConsumer 객체 말이야. 이 객체의 accept()를 호출해주렴.
     list.forEach(new MyConsumer());
   }
 }

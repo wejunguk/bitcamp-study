@@ -59,6 +59,8 @@ public class Exam0242 {
     list.add(m2);
     list.add(m3);
 
+    // forEach에 넘겨주는 객체는?
+    // Consumer인터페이스 규칙에 따라 만든 객체
     list.forEach(new Consumer<>() {
       @Override
       public void accept(Member m) {

@@ -33,9 +33,6 @@ public class Exam0320 {
       return age == other.age && Objects.equals(name, other.name);
     }
 
-
-
-
   }
 
   public static void main(String[] args) {
