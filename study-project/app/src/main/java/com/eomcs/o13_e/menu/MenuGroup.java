@@ -1,10 +1,10 @@
-package com.eomcs.menu;
+package com.eomcs.o13_e.menu;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
-import com.eomcs.pms.handler.AuthLoginHandler;
-import com.eomcs.util.Prompt;
+import com.eomcs.o13_e.pms.handler.AuthHandler;
+import com.eomcs.o13_e.util.Prompt;
 
 // 역할
 // - 다른 메뉴를 포함하는 컨테이너 역할을 수행한다.
@@ -149,11 +149,11 @@ public class MenuGroup extends Menu {
     ArrayList<Menu> menuList = new ArrayList<>();
     for (int i = 0; i < this.size; i++) {
       if (this.childs[i].enableState == Menu.ENABLE_LOGOUT && 
-          AuthLoginHandler.getLoginUser() == null) {
+          AuthHandler.getLoginUser() == null) {
         menuList.add(this.childs[i]);
 
       } else if (this.childs[i].enableState == Menu.ENABLE_LOGIN && 
-          AuthLoginHandler.getLoginUser() != null) {
+          AuthHandler.getLoginUser() != null) {
         menuList.add(this.childs[i]);
 
       } else if (this.childs[i].enableState == Menu.ENABLE_ALL) {

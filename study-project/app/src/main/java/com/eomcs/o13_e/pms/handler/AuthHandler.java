@@ -1,14 +1,13 @@
-package com.eomcs.pms.handler;
+package com.eomcs.o13_e.pms.handler;
 
 import java.util.List;
-import com.eomcs.pms.domain.Member;
-import com.eomcs.util.Prompt;
+import com.eomcs.o13_e.pms.domain.Member;
+import com.eomcs.o13_e.util.Prompt;
 
 public class AuthHandler {
 
   List<Member> memberList;
 
-  // loginUser에 담긴 정보를 다른 클래스에서 사용하기 위해 필드를 구성한다.
   static Member loginUser;
   public static Member getLoginUser() {
     return loginUser;
@@ -16,14 +15,14 @@ public class AuthHandler {
 
   public AuthHandler(List<Member> memberList) {
     this.memberList = memberList;
-  }
 
+  }
 
   public void login() {
     System.out.println("[로그인]");
 
     String email = Prompt.inputString("이메일? ");
-    String password = Prompt.inputString("암호?");
+    String password = Prompt.inputString("암호? ");
 
     Member member = findByEmailPassword(email, password);
 
@@ -31,9 +30,8 @@ public class AuthHandler {
       System.out.println("이메일과 암호가 일치하는 회원을 찾을 수 없습니다.");
     } else {
       System.out.printf("%s님 환영합니다!\n", member.getName());
+      loginUser = member;
     }
-
-    loginUser = member;
   }
 
   public void displayLoginUser() {
@@ -56,7 +54,6 @@ public class AuthHandler {
 
     loginUser = null;
     System.out.println("로그아웃 하였습니다.");
-
   }
 
   private Member findByEmailPassword(String email, String password) {

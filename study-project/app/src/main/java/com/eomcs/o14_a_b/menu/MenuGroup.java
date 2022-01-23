@@ -1,10 +1,10 @@
-package com.eomcs.menu;
+package com.eomcs.o14_a_b.menu;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
-import com.eomcs.pms.handler.AuthLoginHandler;
-import com.eomcs.util.Prompt;
+import com.eomcs.o14_a_b.pms.handler.AuthLoginHandler;
+import com.eomcs.o14_a_b.util.Prompt;
 
 // 역할
 // - 다른 메뉴를 포함하는 컨테이너 역할을 수행한다.

@@ -1,10 +1,10 @@
-package com.eomcs.menu;
+package com.eomcs.o13_a_b_c_d.menu;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
-import com.eomcs.pms.handler.AuthLoginHandler;
-import com.eomcs.util.Prompt;
+import com.eomcs.o13_a_b_c_d.pms.handler.AuthHandler;
+import com.eomcs.o13_a_b_c_d.util.Prompt;
 
 // 역할
 // - 다른 메뉴를 포함하는 컨테이너 역할을 수행한다.
@@ -119,8 +119,6 @@ public class MenuGroup extends Menu {
         // 다음 문장을 실행한 후 시스템을 멈추지 않고 실행을 계속한다.
         System.out.println("--------------------------------------------------------------");
         System.out.printf("오류 발생: %s\n", e.getClass().getName());
-        // 에러내역 상세히 출력
-        e.printStackTrace();
         System.out.println("--------------------------------------------------------------");
       }
     }
@@ -149,11 +147,11 @@ public class MenuGroup extends Menu {
     ArrayList<Menu> menuList = new ArrayList<>();
     for (int i = 0; i < this.size; i++) {
       if (this.childs[i].enableState == Menu.ENABLE_LOGOUT && 
-          AuthLoginHandler.getLoginUser() == null) {
+          AuthHandler.getLoginUser() == null) {
         menuList.add(this.childs[i]);
 
       } else if (this.childs[i].enableState == Menu.ENABLE_LOGIN && 
-          AuthLoginHandler.getLoginUser() != null) {
+          AuthHandler.getLoginUser() != null) {
         menuList.add(this.childs[i]);
 
       } else if (this.childs[i].enableState == Menu.ENABLE_ALL) {
