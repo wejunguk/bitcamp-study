@@ -12,7 +12,7 @@ public class BoardAddHandler extends AbstractBoardHandler {
     super(boardList);
   }
 
-  public void add() {
+  public void execute() {
     System.out.println("[새 게시글]");
 
     Board board = new Board();

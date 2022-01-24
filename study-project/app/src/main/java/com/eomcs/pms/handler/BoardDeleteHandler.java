@@ -11,7 +11,7 @@ public class BoardDeleteHandler extends AbstractBoardHandler {
   }
 
 
-  public void delete() {
+  public void execute() {
     System.out.println("[게시글 삭제]");
     int no = Prompt.inputInt("번호? ");
 

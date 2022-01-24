@@ -6,14 +6,14 @@ import com.eomcs.util.Prompt;
 
 public class TaskDetailHandler extends AbstractTaskHandler {
 
-  public TaskDetailHandler(AbstractProjectHandler projectHandler) {
-    super(projectHandler);
+  public TaskDetailHandler(ProjectPrompt projectPrompt) {
+    super(projectPrompt);
   }
 
-  public void detail() {
+  public void execute() {
     System.out.println("[작업 상세보기]");
 
-    Project project = projectHandler.promptProject();
+    Project project = projectPrompt.promptProject();
     if (project == null) {
       System.out.println("작업 조회를 취소합니다.");
       return;
@@ -25,7 +25,7 @@ public class TaskDetailHandler extends AbstractTaskHandler {
 
     int taskNo = Prompt.inputInt("작업 번호? ");
 
-    Task task = findByNo(project, taskNo);
+    Task task = project.findTaskByNo(taskNo);
     if (task == null) {
       System.out.println("해당 번호의 작업이 없습니다.");
       return;

@@ -4,15 +4,16 @@ import com.eomcs.pms.domain.Project;
 import com.eomcs.pms.domain.Task;
 import com.eomcs.util.Prompt;
 
-public abstract class AbstractTaskHandler {
+public abstract class AbstractTaskHandler implements Command {
 
-  protected AbstractProjectHandler projectHandler;
+  protected ProjectPrompt projectPrompt;
 
-  public AbstractTaskHandler(AbstractProjectHandler projectHandler) {
-    this.projectHandler = projectHandler;
+  public AbstractTaskHandler(ProjectPrompt projectPrompt) {
+    this.projectPrompt = projectPrompt;
   }
 
-  protected void printTasks(Project project) {
+  // 파라미터 받고 출력하는 일만 함 -> static 변경
+  protected static void printTasks(Project project) {
     System.out.printf("%s:\n\n", project.getTitle());
     for (Task task : project.getTasks()) {
       System.out.printf("%d, %s, %s, %s, %s\n",
@@ -47,16 +48,6 @@ public abstract class AbstractTaskHandler {
     System.out.println("2: 완료");
     return Prompt.inputInt("> ");
   }
-
-  protected static Task findByNo(Project project, int taskNo) {
-    for (Task task : project.getTasks()) {
-      if (task.getNo() == taskNo) {
-        return task;
-      }
-    }
-    return null;
-  }
-
 }
 
 
