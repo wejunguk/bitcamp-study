@@ -23,7 +23,7 @@ public class Score3 implements Serializable {
   private static final long serialVersionUID = 100L;
 
   private String name;
-  private String tel; // Test3_1을 실행한 후에 이 필드를 추가한다.
+  //  private String tel; // Test3_1을 실행한 후에 이 필드를 추가한다.
   private int kor;
   private int eng;
   private int math;
@@ -44,22 +44,22 @@ public class Score3 implements Serializable {
 
   @Override
   public String toString() {
-    return "Score3 [name=" + name +
-        ", tel=" + tel +
-        ", kor=" + kor +
-        ", eng=" + eng +
-        ", math=" + math +
-        ", sum=" + sum +
+    return "Score3 [name=" + name + 
+        //        ", tel=" + tel + 
+        ", kor=" + kor + 
+        ", eng=" + eng + 
+        ", math=" + math + 
+        ", sum=" + sum + 
         ", aver=" + aver + "]";
   }
 
-  public String getTel() {
-    return tel;
-  }
-
-  public void setTel(String tel) {
-    this.tel = tel;
-  }
+  //  public String getTel() {
+  //    return tel;
+  //  }
+  //
+  //  public void setTel(String tel) {
+  //    this.tel = tel;
+  //  }
 
   public String getName() {
     return name;

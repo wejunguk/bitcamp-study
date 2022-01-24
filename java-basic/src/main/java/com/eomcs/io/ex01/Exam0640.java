@@ -15,8 +15,6 @@ public class Exam0640 {
     // 객체를 사용할 위치에 익명 클래스를 정의하는 것이
     // 코드를 더 읽기 쉽게 만든다.
     //
-    // Exam630과의 차이?!
-    // 한번만 사용하는 값을 익명클래스로 바로 넣어 바로 실행하자
     File[] files = dir.listFiles(new FileFilter() {
       @Override
       public boolean accept(File file) {

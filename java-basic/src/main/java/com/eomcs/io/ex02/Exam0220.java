@@ -21,7 +21,7 @@ public class Exam0220 {
     // read(byte[], 저장할 위치, 저장하기를 희망하는 개수)
     // - 읽은 데이터를 "저장할 위치"에 지정된 방부터 개수만큼 저장한다.
     // - 리턴 값은 실제 읽은 바이트 개수이다.
-    int count = in.read(buf); // 100개짜리 바이트 배열을 줄테니 너가 읽을만큼 읽어라!
+    int count = in.read(buf);
 
     in.close();
 

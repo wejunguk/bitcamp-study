@@ -18,7 +18,7 @@ public class Exam0130 {
         System.out.printf("%02x ", b);
       }
      */
-    while ((b = in.read()) != -1) { // -1 : 더 이상 읽을 것이 없으면 -1을 리턴
+    while ((b = in.read()) != -1) {
       System.out.printf("%02x ", b);
     }
 

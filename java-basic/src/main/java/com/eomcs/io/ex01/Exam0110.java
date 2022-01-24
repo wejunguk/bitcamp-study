@@ -19,11 +19,8 @@ public class Exam0110 {
     File currentDir = new File("./src/main/java");
     System.out.printf("폴더명: %s\n", currentDir.getName());
     System.out.printf("경로: %s\n", currentDir.getPath());
-    // 경로에 . 을 포함해 나온다.
-    // . => 현재 파일 이름과 동일한 위치인데 중복되서 나옴 ( . = java-basic)
-    System.out.printf("절대경로: %s\n", currentDir.getAbsolutePath()); 
-    // 실제 경로를 알려준다
-    System.out.printf("계산된 절대경로: %s\n", currentDir.getCanonicalPath()); 
+    System.out.printf("절대경로: %s\n", currentDir.getAbsolutePath());
+    System.out.printf("계산된 절대경로: %s\n", currentDir.getCanonicalPath());
 
     System.out.printf("총크기: %d\n", currentDir.getTotalSpace());
     System.out.printf("남은크기: %d\n", currentDir.getFreeSpace());

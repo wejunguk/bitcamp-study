@@ -15,11 +15,11 @@ public class Exam0320 {
 
     long startTime = System.currentTimeMillis(); // 밀리초
 
-
     int count = 0;
-    while ((len = in.read(buf)) != -1)
+    while ((len = in.read(buf)) != -1) {
       out.write(buf, 0, len);
-    count++;
+      count++;
+    }
 
     long endTime = System.currentTimeMillis();
 

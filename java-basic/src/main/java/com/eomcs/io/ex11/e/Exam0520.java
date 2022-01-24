@@ -19,7 +19,7 @@ public class Exam0520 {
     System.out.println(s);
 
     // => transient 값은 인스턴스를 준비한 후 별도의 메서드를 통해 다시 계산해야 한다.
-    s.compute(); // 읽어들인 쪽에서 계산을 따로 한다. -> 결함이 일어날 가능성이 없다.
+    s.compute();
     System.out.println(s);
 
     // 아니 그냥 sum, aver 변수의 값을 파일에 저장한 후 읽으면 되지,

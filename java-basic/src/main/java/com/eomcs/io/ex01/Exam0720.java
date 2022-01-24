@@ -8,12 +8,9 @@ public class Exam0720 {
   public static void main(String[] args) throws Exception {
 
     // temp 디렉토리를 삭제하기
-    // 하위에 파일이나 디렉토리가 존재하면 폴더가 지워지지 않는다.
-    // 하위자료들이 존재하는 경우?
     File dir = new File("temp");
-    dir.delete();
 
-    //    deleteFile(dir);
+    deleteFile(dir);
   }
 
   static void deleteFile(File dir) {

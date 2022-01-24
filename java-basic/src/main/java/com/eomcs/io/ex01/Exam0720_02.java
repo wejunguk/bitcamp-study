@@ -10,7 +10,6 @@ public class Exam0720_02 {
     // temp 디렉토리를 삭제하기
     File dir = new File("temp");
 
-    // 재귀메서도 호출
     deleteFile(dir);
   }
 

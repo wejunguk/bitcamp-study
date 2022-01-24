@@ -13,7 +13,7 @@ import java.io.Serializable;
 public class Score2 implements Serializable {
 
   private String name;
-  private String tel; // Test2_1을 실행한 후 이 필드를 추가하라!
+  //  private String tel; // Test2_1을 실행한 후 이 필드를 추가하라!
   private int kor;
   private int eng;
   private int math;
@@ -34,22 +34,22 @@ public class Score2 implements Serializable {
 
   @Override
   public String toString() {
-    return "Score2 [name=" + name +
-        ", tel=" + tel +
-        ", kor=" + kor +
-        ", eng=" + eng +
-        ", math=" + math +
-        ", sum=" + sum +
+    return "Score2 [name=" + name + 
+        //        ", tel=" + tel + 
+        ", kor=" + kor + 
+        ", eng=" + eng + 
+        ", math=" + math + 
+        ", sum=" + sum + 
         ", aver=" + aver + "]";
   }
 
-  public String getTel() {
-    return tel;
-  }
-
-  public void setTel(String tel) {
-    this.tel = tel;
-  }
+  //  public String getTel() {
+  //    return tel;
+  //  }
+  //
+  //  public void setTel(String tel) {
+  //    this.tel = tel;
+  //  }
 
   public String getName() {
     return name;

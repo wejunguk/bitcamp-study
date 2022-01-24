@@ -20,7 +20,6 @@ public class Test03_2 {
     BufferedInputStream in1 = new BufferedInputStream(in0);
     DataInputStream in = new DataInputStream(in1);
 
-    // 출력할 갯수 읽어옴
     int len = in.readInt();
 
     for (int i = 0; i < len; i++) {
