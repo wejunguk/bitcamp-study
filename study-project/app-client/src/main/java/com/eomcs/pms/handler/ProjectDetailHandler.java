@@ -1,16 +1,17 @@
 package com.eomcs.pms.handler;
 
-import com.eomcs.pms.dao.ProjectDao;
+import java.util.HashMap;
 import com.eomcs.pms.domain.Member;
 import com.eomcs.pms.domain.Project;
+import com.eomcs.request.RequestAgent;
 import com.eomcs.util.Prompt;
 
 public class ProjectDetailHandler implements Command {
 
-  ProjectDao projectDao;
+  RequestAgent requestAgent;
 
-  public ProjectDetailHandler(ProjectDao projectDao) {
-    this.projectDao = projectDao;
+  public ProjectDetailHandler(RequestAgent requestAgent) {
+    this.requestAgent = requestAgent;
   }
 
   @Override
@@ -18,12 +19,17 @@ public class ProjectDetailHandler implements Command {
     System.out.println("[프로젝트 상세보기]");
     int no = Prompt.inputInt("번호? ");
 
-    Project project = projectDao.findByNo(no);
+    HashMap<String,String> params = new HashMap<>();
+    params.put("no", String.valueOf(no));
 
-    if (project == null) {
+    requestAgent.request("project.selectOne", params);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       System.out.println("해당 번호의 프로젝트가 없습니다.");
       return;
     }
+
+    Project project = requestAgent.getObject(Project.class);
 
     System.out.printf("프로젝트명: %s\n", project.getTitle());
     System.out.printf("내용: %s\n", project.getContent());
@@ -42,7 +48,7 @@ public class ProjectDetailHandler implements Command {
     request.setAttribute("no", no);
 
     while (true) {
-      String input = Prompt.inputString("변경(U), 삭제(D), 이전(0)> ");
+      String input = Prompt.inputString("변경(U), 삭제(D), 이전(0)>");
       switch (input) {
         case "U":
         case "u":

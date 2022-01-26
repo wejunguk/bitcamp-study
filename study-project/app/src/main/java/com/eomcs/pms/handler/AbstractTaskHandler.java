@@ -12,7 +12,6 @@ public abstract class AbstractTaskHandler implements Command {
     this.projectPrompt = projectPrompt;
   }
 
-  // 파라미터 받고 출력하는 일만 함 -> static 변경
   protected static void printTasks(Project project) {
     System.out.printf("%s:\n\n", project.getTitle());
     for (Task task : project.getTasks()) {

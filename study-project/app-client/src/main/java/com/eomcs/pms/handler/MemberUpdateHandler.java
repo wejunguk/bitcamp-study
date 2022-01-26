@@ -1,19 +1,16 @@
 package com.eomcs.pms.handler;
 
 import java.util.HashMap;
-import org.apache.ibatis.session.SqlSession;
-import com.eomcs.pms.dao.MemberDao;
 import com.eomcs.pms.domain.Member;
+import com.eomcs.request.RequestAgent;
 import com.eomcs.util.Prompt;
 
 public class MemberUpdateHandler implements Command {
 
-  MemberDao memberDao;
-  SqlSession sqlSession;
+  RequestAgent requestAgent;
 
-  public MemberUpdateHandler(MemberDao memberDao, SqlSession sqlSession) {
-    this.memberDao = memberDao;
-    this.sqlSession = sqlSession;
+  public MemberUpdateHandler(RequestAgent requestAgent) {
+    this.requestAgent = requestAgent;
   }
 
   @Override
@@ -24,12 +21,14 @@ public class MemberUpdateHandler implements Command {
     HashMap<String,String> params = new HashMap<>();
     params.put("no", String.valueOf(no));
 
-    Member member = memberDao.findByNo(no);
+    requestAgent.request("member.selectOne", params);
 
-    if (member == null) {
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       System.out.println("해당 번호의 회원이 없습니다.");
       return;
     }
+
+    Member member = requestAgent.getObject(Member.class);
 
     String name = Prompt.inputString("이름(" + member.getName()  + ")? ");
     String email = Prompt.inputString("이메일(" + member.getEmail() + ")? ");
@@ -49,8 +48,13 @@ public class MemberUpdateHandler implements Command {
     member.setPhoto(photo);
     member.setTel(tel);
 
-    memberDao.update(member);
-    sqlSession.commit();
+    requestAgent.request("member.update", member);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      System.out.println("회원 변경 실패!");
+      System.out.println(requestAgent.getObject(String.class));
+      return;
+    }
 
     System.out.println("회원을 변경하였습니다.");
   }

@@ -1,19 +1,16 @@
 package com.eomcs.pms.handler;
 
-import org.apache.ibatis.session.SqlSession;
-import com.eomcs.pms.dao.BoardDao;
+import java.util.HashMap;
 import com.eomcs.pms.domain.Board;
-import com.eomcs.pms.domain.Member;
+import com.eomcs.request.RequestAgent;
 import com.eomcs.util.Prompt;
 
 public class BoardDetailHandler implements Command {
 
-  BoardDao boardDao;
-  SqlSession sqlSession;
+  RequestAgent requestAgent;
 
-  public BoardDetailHandler(BoardDao boardDao, SqlSession sqlSession) {
-    this.boardDao = boardDao;
-    this.sqlSession = sqlSession;
+  public BoardDetailHandler(RequestAgent requestAgent) {
+    this.requestAgent = requestAgent;
   }
 
   @Override
@@ -21,12 +18,17 @@ public class BoardDetailHandler implements Command {
     System.out.println("[게시글 상세보기]");
     int no = Prompt.inputInt("번호? ");
 
-    Board board = boardDao.findByNo(no);
+    HashMap<String,String> params = new HashMap<>();
+    params.put("no", String.valueOf(no));
 
-    if (board == null) {
+    requestAgent.request("board.selectOne", params);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       System.out.println("해당 번호의 게시글이 없습니다.");
       return;
     }
+
+    Board board = requestAgent.getObject(Board.class);
 
     System.out.printf("제목: %s\n", board.getTitle());
     System.out.printf("내용: %s\n", board.getContent());
@@ -37,14 +39,11 @@ public class BoardDetailHandler implements Command {
     System.out.printf("조회수: %d\n", board.getViewCount());
     System.out.println();
 
-    boardDao.updateCount(no);
-    sqlSession.commit();
-
-    Member loginUser = AuthLoginHandler.getLoginUser(); 
-    if (loginUser == null || 
-        (board.getWriter().getNo() != loginUser.getNo() && !loginUser.getEmail().equals("root@test.com"))) {
-      return;
-    }
+    //    Member loginUser = AuthLoginHandler.getLoginUser(); 
+    //    if (loginUser == null || 
+    //        (board.getWriter().getNo() != loginUser.getNo() && !loginUser.getEmail().equals("root@test.com"))) {
+    //      return;
+    //    }
 
     request.setAttribute("no", no);
 

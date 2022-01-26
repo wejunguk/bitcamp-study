@@ -10,13 +10,11 @@ public class BoardDeleteHandler extends AbstractBoardHandler {
     super(boardList);
   }
 
-
-  public void execute() {
+  @Override
+  public void execute(CommandRequest request) {
     System.out.println("[게시글 삭제]");
-    int no = Prompt.inputInt("번호? ");
+    int no = (int) request.getAttribute("no");
 
-    // 같은 클래스 안에 findByNo이 있기때문에
-    // 바로 불러올 수 있다.
     Board board = findByNo(no);
 
     if (board == null) {
@@ -25,7 +23,7 @@ public class BoardDeleteHandler extends AbstractBoardHandler {
     }
 
     if (board.getWriter().getNo() != AuthLoginHandler.getLoginUser().getNo()) {
-      System.out.println("변경 권한이 없습니다.");
+      System.out.println("삭제 권한이 없습니다.");
       return;
     }
 
@@ -37,10 +35,8 @@ public class BoardDeleteHandler extends AbstractBoardHandler {
 
     boardList.remove(board);
 
-
     System.out.println("게시글을 삭제하였습니다.");
   }
-
 }
 
 

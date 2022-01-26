@@ -1,7 +1,7 @@
 package com.eomcs.o09_a.pms.hadler;
 
 import com.eomcs.o09_a.pms.domain.Member;
-import com.eomcs.util.Prompt;
+import com.eomcs.o09_a.util.Prompt;
 
 public class MemberHandler {
 

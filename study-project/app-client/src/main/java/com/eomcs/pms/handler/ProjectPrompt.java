@@ -1,22 +1,29 @@
 package com.eomcs.pms.handler;
 
 import java.util.Collection;
-import com.eomcs.pms.dao.ProjectDao;
 import com.eomcs.pms.domain.Project;
+import com.eomcs.request.RequestAgent;
 import com.eomcs.util.Prompt;
 
 public class ProjectPrompt {
 
-  ProjectDao projectDao;
+  protected RequestAgent requestAgent;
 
-  public ProjectPrompt(ProjectDao projectDao) {
-    this.projectDao = projectDao;
+  public ProjectPrompt(RequestAgent requestAgent) {
+    this.requestAgent = requestAgent;
   }
 
   public Project promptProject() throws Exception {
     System.out.println("프로젝트:");
 
-    Collection<Project> projectList = projectDao.findAll();
+    requestAgent.request("project.selectList", null);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      System.out.println("목록 조회 실패!");
+      return null;
+    }
+
+    Collection<Project> projectList = requestAgent.getObjects(Project.class);
 
     for (Project project : projectList) {
       System.out.printf("  %d. %s\n", project.getNo(), project.getTitle());

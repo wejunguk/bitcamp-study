@@ -4,7 +4,8 @@ import com.eomcs.pms.domain.Member;
 
 public class AuthUserInfoHandler implements Command {
 
-  public void execute() {
+  @Override
+  public void execute(CommandRequest request) {
     System.out.println("[내정보]");
 
     Member loginUser = AuthLoginHandler.getLoginUser();

@@ -36,8 +36,7 @@ public class MenuGroup extends Menu {
   }
 
   public MenuGroup(String title, int accessScope) {
-    super(title);
-    this.accessScope = accessScope;
+    super(title, accessScope);
   }
 
   public MenuGroup(String title, boolean disablePrevMenu) {
@@ -56,14 +55,13 @@ public class MenuGroup extends Menu {
 
   // MenuGroup이 포함하는 하위 Menu를 다룰 수 있도록 메서드를 정의한다.
   public void add(Menu child) {
-    childs.add(child);
+    childs.add(child); 
   }
 
-  // childs 지웠으면 child리턴
+  // 배열에 들어 있는 Menu 객체를 찾아 제거한다.
   public Menu remove(Menu child) {
-    if (childs.remove(child)) {
+    if (childs.remove(child)) 
       return child;
-    }
     return null;
   }
 
@@ -96,7 +94,6 @@ public class MenuGroup extends Menu {
         // 다음 문장을 실행한 후 시스템을 멈추지 않고 실행을 계속한다.
         System.out.println("--------------------------------------------------------------");
         System.out.printf("오류 발생: %s\n", e.getClass().getName());
-        // 에러내역 상세히 출력
         e.printStackTrace();
         System.out.println("--------------------------------------------------------------");
       }
@@ -121,13 +118,14 @@ public class MenuGroup extends Menu {
   // 왜?
   // - 메뉴 출력 속도를 빠르게 하기 위함.
   // - 메뉴를 출력할 때 출력할 메뉴와 출력하지 말아야 할 메뉴를 구분하는 시간을 줄이기 위함.
+  // 
   private List<Menu> getMenuList() {
     ArrayList<Menu> menuList = new ArrayList<>();
     for (Menu menu : childs) {
-      if ((menu.accessScope & AuthLoginHandler.getUserAccessLevel()) > 0) {
-        // 사용자가 해당 메뉴에 접근 할 수 있는지 검사한다.
-        //    예) 메뉴의 접근 범위:   0100  = 관리자만 접근 가능   
-        //        사용자의 접근 수준: 0110  = 관리자 및 일반 메뉴 접근 가능
+      // 사용자가 해당 메뉴에 접근 할 수 있는지 검사한다.
+      //    예) 메뉴의 접근 범위:   0100  = 관리자만 접근 가능   
+      //        사용자의 접근 수준: 0110  = 관리자 및 일반 메뉴 접근 가능
+      if ((menu.accessScope & AuthLoginHandler.getUserAccessLevel()) > 0 ) {
         menuList.add(menu);
       } 
     }

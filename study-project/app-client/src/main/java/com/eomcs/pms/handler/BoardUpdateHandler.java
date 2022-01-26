@@ -1,18 +1,16 @@
 package com.eomcs.pms.handler;
 
-import org.apache.ibatis.session.SqlSession;
-import com.eomcs.pms.dao.BoardDao;
+import java.util.HashMap;
 import com.eomcs.pms.domain.Board;
+import com.eomcs.request.RequestAgent;
 import com.eomcs.util.Prompt;
 
 public class BoardUpdateHandler implements Command {
 
-  BoardDao boardDao;
-  SqlSession sqlSession;
+  RequestAgent requestAgent;
 
-  public BoardUpdateHandler(BoardDao boardDao, SqlSession sqlSession) {
-    this.boardDao = boardDao;
-    this.sqlSession = sqlSession;
+  public BoardUpdateHandler(RequestAgent requestAgent) {
+    this.requestAgent = requestAgent;
   }
 
   @Override
@@ -20,12 +18,17 @@ public class BoardUpdateHandler implements Command {
     System.out.println("[게시글 변경]");
     int no = (int) request.getAttribute("no");
 
-    Board board = boardDao.findByNo(no);
+    HashMap<String,String> params = new HashMap<>();
+    params.put("no", String.valueOf(no));
 
-    if (board == null) {
+    requestAgent.request("board.selectOne", params);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       System.out.println("해당 번호의 게시글이 없습니다.");
       return;
     }
+
+    Board board = requestAgent.getObject(Board.class);
 
     if (board.getWriter().getNo() != AuthLoginHandler.getLoginUser().getNo()) {
       System.out.println("변경 권한이 없습니다.");
@@ -41,12 +44,16 @@ public class BoardUpdateHandler implements Command {
       return;
     }
 
-
     board.setTitle(title);
     board.setContent(content);
 
-    boardDao.update(board);
-    sqlSession.commit();
+    requestAgent.request("board.update", board);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      System.out.println("게시글 변경 실패!");
+      System.out.println(requestAgent.getObject(String.class));
+      return;
+    }
 
     System.out.println("게시글을 변경하였습니다.");
   }

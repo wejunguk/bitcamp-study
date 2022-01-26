@@ -10,7 +10,8 @@ public class TaskAddHandler extends AbstractTaskHandler {
     super(projectPrompt);
   }
 
-  public void execute() {
+  @Override
+  public void execute(CommandRequest request) {
     System.out.println("[작업 등록]");
 
     Project project = projectPrompt.promptProject();

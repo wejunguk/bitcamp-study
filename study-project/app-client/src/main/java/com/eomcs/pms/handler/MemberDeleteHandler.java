@@ -1,18 +1,15 @@
 package com.eomcs.pms.handler;
 
-import org.apache.ibatis.session.SqlSession;
-import com.eomcs.pms.dao.MemberDao;
-import com.eomcs.pms.domain.Member;
+import java.util.HashMap;
+import com.eomcs.request.RequestAgent;
 import com.eomcs.util.Prompt;
 
 public class MemberDeleteHandler implements Command {
 
-  MemberDao memberDao;
-  SqlSession sqlSession;
+  RequestAgent requestAgent;
 
-  public MemberDeleteHandler(MemberDao memberDao, SqlSession sqlSession) {
-    this.memberDao = memberDao;
-    this.sqlSession = sqlSession;
+  public MemberDeleteHandler(RequestAgent requestAgent) {
+    this.requestAgent = requestAgent;
   }
 
   @Override
@@ -20,9 +17,12 @@ public class MemberDeleteHandler implements Command {
     System.out.println("[회원 삭제]");
     int no = (int) request.getAttribute("no");
 
-    Member member = memberDao.findByNo(no);
+    HashMap<String,String> params = new HashMap<>();
+    params.put("no", String.valueOf(no));
 
-    if (member == null) {
+    requestAgent.request("member.selectOne", params);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       System.out.println("해당 번호의 회원이 없습니다.");
       return;
     }
@@ -33,8 +33,13 @@ public class MemberDeleteHandler implements Command {
       return;
     }
 
-    memberDao.delete(no);
-    sqlSession.commit();
+    requestAgent.request("member.delete", params);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      System.out.println("회원 삭제 실패!");
+      System.out.println(requestAgent.getObject(String.class));
+      return;
+    }
 
     System.out.println("회원을 삭제하였습니다.");
   }

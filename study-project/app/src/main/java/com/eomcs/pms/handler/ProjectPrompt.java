@@ -8,7 +8,6 @@ public class ProjectPrompt {
 
   protected List<Project> projectList;
 
-  // ProjectPrompt를 다룰려면 projectList가 필요해서 생성자로 선언한다.
   public ProjectPrompt(List<Project> projectList) {
     this.projectList = projectList;
   }

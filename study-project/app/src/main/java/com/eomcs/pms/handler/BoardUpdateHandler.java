@@ -4,15 +4,16 @@ import java.util.List;
 import com.eomcs.pms.domain.Board;
 import com.eomcs.util.Prompt;
 
-public class BoardUpdateHandler extends AbstractBoardHandler{
+public class BoardUpdateHandler extends AbstractBoardHandler {
 
   public BoardUpdateHandler(List<Board> boardList) {
     super(boardList);
   }
 
-  public void execute() {
+  @Override
+  public void execute(CommandRequest request) {
     System.out.println("[게시글 변경]");
-    int no = Prompt.inputInt("번호? ");
+    int no = (int) request.getAttribute("no");
 
     Board board = findByNo(no);
 
@@ -39,7 +40,6 @@ public class BoardUpdateHandler extends AbstractBoardHandler{
     board.setContent(content);
     System.out.println("게시글을 변경하였습니다.");
   }
-
 }
 
 

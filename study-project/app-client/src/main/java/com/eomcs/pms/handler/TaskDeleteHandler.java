@@ -1,30 +1,23 @@
 package com.eomcs.pms.handler;
 
-import org.apache.ibatis.session.SqlSession;
-import com.eomcs.pms.dao.TaskDao;
-import com.eomcs.pms.domain.Project;
+import java.util.HashMap;
 import com.eomcs.pms.domain.Task;
+import com.eomcs.request.RequestAgent;
 import com.eomcs.util.Prompt;
 
 public class TaskDeleteHandler implements Command {
 
-  TaskDao taskDao;
-  SqlSession sqlSession;
+  RequestAgent requestAgent;
+  ProjectPrompt projectPrompt;
 
-  public TaskDeleteHandler(TaskDao taskDao, SqlSession sqlSession) {
-    this.taskDao = taskDao;
-    this.sqlSession = sqlSession;
+  public TaskDeleteHandler(RequestAgent requestAgent, ProjectPrompt projectPrompt) {
+    this.requestAgent = requestAgent;
+    this.projectPrompt = projectPrompt;
   }
 
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[작업 삭제]");
-
-    Project project = (Project) request.getAttribute("project");
-    if (project.getOwner().getNo() != AuthLoginHandler.getLoginUser().getNo()) {
-      System.out.println("이 프로젝트의 관리자가 아닙니다.");
-      return;
-    }
 
     Task task = (Task) request.getAttribute("task");
 
@@ -34,10 +27,18 @@ public class TaskDeleteHandler implements Command {
       return;
     }
 
-    taskDao.delete(task.getNo());
-    sqlSession.commit();
+    HashMap<String,String> params = new HashMap<>();
+    params.put("taskNo", String.valueOf(task.getNo()));
+    params.put("projectNo", String.valueOf(task.getProject().getNo()));
 
-    System.out.println("작업를 삭제하였습니다.");
+    requestAgent.request("project.task.delete", params);
+
+    if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
+      System.out.println("작업를 삭제하였습니다.");
+    } else {
+      System.out.println("작업 삭제 실패!");
+    }
+
   }
 }
 

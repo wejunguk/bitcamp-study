@@ -3,7 +3,8 @@ package com.eomcs.pms.handler;
 import com.eomcs.menu.Menu;
 
 public class AuthLogoutHandler implements Command {
-  public void execute() {
+  @Override
+  public void execute(CommandRequest request) {
     System.out.println("[로그아웃]");
 
     AuthLoginHandler.loginUser = null;

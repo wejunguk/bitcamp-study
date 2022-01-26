@@ -1,15 +1,16 @@
 package com.eomcs.pms.handler;
 
-import com.eomcs.pms.dao.MemberDao;
+import java.util.HashMap;
 import com.eomcs.pms.domain.Member;
+import com.eomcs.request.RequestAgent;
 import com.eomcs.util.Prompt;
 
 public class MemberDetailHandler implements Command {
 
-  MemberDao memberDao;
+  RequestAgent requestAgent;
 
-  public MemberDetailHandler(MemberDao memberDao) {
-    this.memberDao = memberDao;
+  public MemberDetailHandler(RequestAgent requestAgent) {
+    this.requestAgent = requestAgent;
   }
 
   @Override
@@ -17,11 +18,17 @@ public class MemberDetailHandler implements Command {
     System.out.println("[회원 상세보기]");
     int no = Prompt.inputInt("번호? ");
 
-    Member member = memberDao.findByNo(no);
-    if (member == null) {
+    HashMap<String,String> params = new HashMap<>();
+    params.put("no", String.valueOf(no));
+
+    requestAgent.request("member.selectOne", params);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       System.out.println("해당 번호의 회원이 없습니다.");
       return;
     }
+
+    Member member = requestAgent.getObject(Member.class);
 
     System.out.printf("이름: %s\n", member.getName());
     System.out.printf("이메일: %s\n", member.getEmail());
@@ -30,11 +37,10 @@ public class MemberDetailHandler implements Command {
     System.out.printf("등록일: %s\n", member.getRegisteredDate());
     System.out.println();
 
-    Member loginUser = AuthLoginHandler.getLoginUser(); 
-    if (loginUser == null ||
-        (!loginUser.getEmail().equals("root@test.com") && (member.getNo() != loginUser.getNo()))) { 
-      return;
-    }
+    //    Member loginUser = AuthLoginHandler.getLoginUser(); 
+    //    if (loginUser == null || (member.getNo() != loginUser.getNo() && !loginUser.getEmail().equals("root@test.com"))) {
+    //      return;
+    //    }
 
     request.setAttribute("no", no);
 
