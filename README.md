@@ -1045,6 +1045,7 @@
 - DBMS(eomcs-docs)
 	- SQL : DDL(계속)
 	- SQL : DML
+	- 제약 조건 조회 (sql-Exam01)
 - 팀 프로젝트 
 	- 팀별 프로젝트 구현
 

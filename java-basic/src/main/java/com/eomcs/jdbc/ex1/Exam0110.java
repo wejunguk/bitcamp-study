@@ -66,6 +66,10 @@ public class Exam0110 {
       java.sql.Driver driver3 = DriverManager.getDriver("jdbc:sqlserver://");
       System.out.println(driver3);
 
+      // 등록되지 않은 드라이버를 찾을 경우 예외 발생!
+      java.sql.Driver driver4 = DriverManager.getDriver("jdbc:db2://");
+      System.out.println(driver4);
+
     } catch (SQLException e) {
       e.printStackTrace();
     }
