@@ -3,16 +3,26 @@ package com.eomcs.pms;
 import static com.eomcs.menu.Menu.ACCESS_ADMIN;
 import static com.eomcs.menu.Menu.ACCESS_GENERAL;
 import static com.eomcs.menu.Menu.ACCESS_LOGOUT;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import com.eomcs.context.ApplicationContextListener;
 import com.eomcs.menu.Menu;
 import com.eomcs.menu.MenuFilter;
 import com.eomcs.menu.MenuGroup;
-import com.eomcs.pms.dao.impl.NetBoardDao;
-import com.eomcs.pms.dao.impl.NetMemberDao;
-import com.eomcs.pms.dao.impl.NetProjectDao;
+import com.eomcs.pms.dao.BoardDao;
+import com.eomcs.pms.dao.MemberDao;
+import com.eomcs.pms.dao.ProjectDao;
+import com.eomcs.pms.dao.TaskDao;
+import com.eomcs.pms.dao.impl.MariadbBoardDao;
+import com.eomcs.pms.dao.impl.MariadbProjectDao;
+import com.eomcs.pms.dao.impl.MariadbTaskDao;
+import com.eomcs.pms.dao.impl.MybatisMemberDao;
 import com.eomcs.pms.handler.AuthLoginHandler;
 import com.eomcs.pms.handler.AuthLogoutHandler;
 import com.eomcs.pms.handler.AuthUserInfoHandler;
@@ -46,6 +56,9 @@ import com.eomcs.request.RequestAgent;
 import com.eomcs.util.Prompt;
 
 public class ClientApp {
+
+  SqlSession sqlSession;
+  Connection con;
 
   RequestAgent requestAgent;
 
@@ -107,12 +120,21 @@ public class ClientApp {
   public ClientApp() throws Exception {
 
     // 서버와 통신을 담당할 객체 준비
-    requestAgent = new RequestAgent("127.0.0.1", 8888);
+    requestAgent = null;
+
+    // DBMS와 연결한다.
+    con = DriverManager.getConnection(
+        "jdbc:mysql://localhost:3306/studydb?user=study&password=1111");
+
+    // Mybatis의 SqlSession 객체 준비
+    sqlSession = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream(
+        "com/eomcs/pms/conf/mybatis-config.xml")).openSession();
 
     // 데이터 관리를 담당할 DAO 객체를 준비한다.
-    NetBoardDao boardDao = new NetBoardDao(requestAgent);
-    NetMemberDao memberDao = new NetMemberDao(requestAgent);
-    NetProjectDao projectDao = new NetProjectDao(requestAgent);
+    BoardDao boardDao = new MariadbBoardDao(con);
+    MemberDao memberDao = new MybatisMemberDao(sqlSession);
+    ProjectDao projectDao = new MariadbProjectDao(con);
+    TaskDao taskDao = new MariadbTaskDao(con);
 
     // Command 객체 준비
     commandMap.put("/member/add", new MemberAddHandler(memberDao));
@@ -128,7 +150,7 @@ public class ClientApp {
     commandMap.put("/board/delete", new BoardDeleteHandler(boardDao));
     commandMap.put("/board/search", new BoardSearchHandler(boardDao));
 
-    commandMap.put("/auth/login", new AuthLoginHandler(requestAgent));
+    commandMap.put("/auth/login", new AuthLoginHandler(memberDao));
     commandMap.put("/auth/logout", new AuthLogoutHandler());
     commandMap.put("/auth/userinfo", new AuthUserInfoHandler());
 
@@ -141,11 +163,11 @@ public class ClientApp {
     commandMap.put("/project/delete", new ProjectDeleteHandler(projectDao));
 
     ProjectPrompt projectPrompt = new ProjectPrompt(projectDao);
-    commandMap.put("/task/add", new TaskAddHandler(projectDao, projectPrompt));
-    commandMap.put("/task/list", new TaskListHandler(projectPrompt));
-    commandMap.put("/task/detail", new TaskDetailHandler(projectPrompt));
-    commandMap.put("/task/update", new TaskUpdateHandler(projectDao, projectPrompt));
-    commandMap.put("/task/delete", new TaskDeleteHandler(projectDao, projectPrompt));
+    commandMap.put("/task/add", new TaskAddHandler(taskDao));
+    commandMap.put("/task/list", new TaskListHandler(projectPrompt, taskDao));
+    commandMap.put("/task/detail", new TaskDetailHandler(taskDao));
+    commandMap.put("/task/update", new TaskUpdateHandler(taskDao));
+    commandMap.put("/task/delete", new TaskDeleteHandler(taskDao));
   }
 
   // MenuGroup에서 사용할 필터를 정의한다.
@@ -201,9 +223,7 @@ public class ClientApp {
   private Menu createTaskMenu() {
     MenuGroup taskMenu = new MenuGroup("작업");
     taskMenu.setMenuFilter(menuFilter);
-    taskMenu.add(new MenuItem("등록", ACCESS_GENERAL, "/task/add"));
     taskMenu.add(new MenuItem("목록", "/task/list"));
-    taskMenu.add(new MenuItem("상세보기", "/task/detail"));
     return taskMenu;
   }
 
@@ -228,6 +248,8 @@ public class ClientApp {
 
     notifyOnApplicationEnded();
 
+    // DBMS와 연결을 끊는다.
+    con.close();
   }
 
   public static void main(String[] args) throws Exception {

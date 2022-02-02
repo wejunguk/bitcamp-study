@@ -12,7 +12,6 @@
     <!-- DBMS의 연결 정보는 다음과 같이 environment 태그에 설정한다. -->
     <!-- 예) 개발용 DBMS -->   
     <environment id="development">
-      
       <!-- 트랜잭션 관리 방식을 지정한다. -->
       <transactionManager type="JDBC"/>
       
