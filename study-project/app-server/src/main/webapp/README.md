@@ -1,0 +1,1 @@
+# 웹 자원(HTML,CSS,JAVAScript, Image파일)을 두는 곳

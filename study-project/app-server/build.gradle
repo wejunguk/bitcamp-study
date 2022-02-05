@@ -1,16 +1,8 @@
 // Gradle 도구에 추가할 작업이 있으면 플러그인을 장착하라!
 plugins {
-    //id 'java' // 자바 애플리케이션 빌드 관련 작업들을 추가한다.
-    id 'application' // = 자바플러그인+애플리케이션 관력 작업
-    id 'eclipse' // = 이클립스 IDE와 관련된 작업이 들어있다.-> 이클립스 플러그인 추가
-    //eclipseProject : .project 파일 생성
-    //eclipseClasspath : .classpath 파일 생성
-    //eclipseJdt : JDT 관련 파일 생성 (.settings/ 폴더 및 파일 생성)
-    //eclipse: = eclipseProject + eclipseClasspath
-    //cleanEclipseProject : .project 파일 제거
-    //cleanEclipseClasspath: .class 파일 제거
-    //cleanEclipseJdt : JDT 관련 파일 제거
-    //cleanEclipse : cleanEclipseProject + cleanEclipseClasspath+eclipseJdt
+    id 'java' 
+    id 'eclipse-wtp' // 이클립스 IDE 용 웹 프로젝트 관련 파일을 만들 때 사용할 도구가 들어 있는 플러그인 장착
+    id 'war' // 웹 애플리케이션의 배포 파일을 만들 때 사용할 도구가 들어 있는 플러그인 장착
 }
 
 // eclipse 프로젝트 이름을 설정하기
@@ -20,10 +12,22 @@ eclipse {
     }
 }
 
+// 서블릿 컨테이너에 배치할 때 사용할 웹 애플리케이션 이름을 설정한다.
+// 이 이름은 .war 배치 파일을 만들 때도 사용한다.
+war {
+    archiveBaseName = "pms"
+}
+
 // 자바 소스를 컴파일 할 때 적용할 옵션
 tasks.withType(JavaCompile) {
     // $javac -encoding UTF-8 ...
     options.encoding = 'UTF-8';
+    
+    // 소스 파일을 작성할 때 사용할 자바 버전
+    sourceCompatibility = '11'
+
+    // 자바 클래스를 실행시킬 JVM의 최소 버전
+    targetCompatibility = '11'
 }
 
 // 프로젝트에서 외부의 라이브러리를 사용한다면
@@ -38,17 +42,37 @@ repositories {
 // 등록한 라이브러리를 자동으로 다운로드 받는다.
 // => 이렇게 다운로드 받은 라이브러리는 컴파일하거나 실행할 때 사용된다.
 dependencies {
+  // 라이브러리 유형
+  // 1) implementation
+  //    => 컴파일할 때 사용하고, 배포할 때 포함한다.
+  // 2) providedCompile
+  //    => 컴파일 할 때 사용하고, 배포에서는 제외한다.
+  // 3) testImplementation
+  //    => 테스트 소스를 컴파일 할 때만 사용, 배포에서 제외한다.
+  
+  // 서블릿 API
+  // - 서블릿 컨테이너에 있는 라이브러리다. 따라서 배포할 때 제외해야 한다.
+  // - 프로그램을 개발하는 동안 컴파일할 때 사용해야 하기 때문에 providedCompile 로 설정한다.
+  providedCompile 'javax.servlet:javax.servlet-api:4.0.1'
+  
+  // JSP API
+  // - 서블릿 컨테이너에 있는 라이브러리다. 따라서 배포할 때 제외해야 한다.
+  // - 프로그램을 개발하는 동안 컴파일할 때 사용해야 하기 때문에 providedCompile 로 설정한다.
+  providedCompile 'javax.servlet.jsp:javax.servlet.jsp-api:2.3.3'
 
-// Google JSON 라이브러리
+  // Google JSON 라이브러리
   implementation 'com.google.code.gson:gson:2.8.8'
+  
+  // JSTL 구현체
+  implementation 'javax.servlet:jstl:1.2' // JSTL API + JSTL 구현체
+  //implementation 'javax.servlet.jsp.jstl:javax.servlet.jsp.jstl-api:1.2.2' // JSTL API 만 있다.
+  
+  // MariaDB JDBC 드라이버
+  implementation 'org.mariadb.jdbc:mariadb-java-client:2.7.4'
+    
+  // Mybatis 프레임워크 추가
+  implementation 'org.mybatis:mybatis:3.5.7'
       
   testImplementation 'junit:junit:4.13.2'
-   implementation 'com.google.guava:guava:30.1-jre'
+  implementation 'com.google.guava:guava:30.1-jre'
 }
-
-//'application' 플러그인에서 run작업을 실행할 때 사용할
-// 클래스 이름을 지정한다.
-application {
-    mainClass = 'com.eomcs.pms.ServerApp'
-}
-
